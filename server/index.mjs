@@ -1,22 +1,16 @@
 import { resolve } from "node:path";
-import { createStore } from "./store.mjs";
-import { createApp } from "./app.mjs";
-import { credentials } from "./credentials.mjs";
-import { createCollector } from "./collector.mjs";
+import { createWorkspaceApp } from "./workspaces.mjs";
 import express from "express";
 const dataDir = resolve(process.env.DATA_DIR || ".data");
-const store = createStore(resolve(dataDir, "instagram.sqlite"));
-store.recover();
-const secrets = credentials(resolve(dataDir, "connection.json"));
-const collector = createCollector(store, secrets);
-const app = createApp(store, secrets, collector);
+const workspaces = createWorkspaceApp(dataDir);
+const app = workspaces.app;
 if (process.env.NODE_ENV === "production") {
   app.use(express.static("dist"));
   app.get("/{*path}", (_req, res) => res.sendFile(resolve("dist/index.html")));
 } else {
   const { createServer } = await import("vite");
   const vite = await createServer({
-    server: { middlewareMode: true },
+    server: { middlewareMode: true, watch: { ignored: ["**/docs/media/**", "**/.research/**", "**/.data/**"] } },
     appType: "spa",
   });
   app.use(vite.middlewares);
@@ -27,13 +21,12 @@ const server = app.listen(port, "127.0.0.1", (error) => {
     console.error(`서버 시작 실패: ${error.code}`);
     process.exit(1);
   }
-  collector.start();
-  console.log(`CatchMoment: http://127.0.0.1:${port}`);
+  workspaces.start();
+  console.log(`Aialy Contents Watcher: http://127.0.0.1:${port}`);
 });
 function stop() {
-  collector.stop();
   server.close(() => {
-    store.db.close();
+    workspaces.close();
     process.exit(0);
   });
 }

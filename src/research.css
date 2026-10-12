@@ -831,3 +831,20 @@
     min-width: 0;
   }
 }
+.logo-wordmark {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  line-height: 1.1;
+  margin-left: 5px;
+}
+.logo-wordmark strong {
+  font-size: 23px;
+  letter-spacing: -0.7px;
+}
+.logo-wordmark small {
+  font-size: 10px;
+  letter-spacing: 0.5px;
+  color: #8192ad;
+  font-weight: 500;
+}

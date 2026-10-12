@@ -256,3 +256,30 @@ test("research screens fit mobile and keep metrics in scope", async ({
     fullPage: true,
   });
 });
+
+test("category workspace creation, switching, tab isolation and refresh persistence", async ({ page, context }) => {
+  await page.goto("/");
+  await page.getByLabel("워크스페이스 전환", { exact: true }).click();
+  await page.getByRole("button", { name: "헤어케어", exact: true }).click();
+  await page.getByRole("button", { name: "워크스페이스 만들기", exact: true }).click();
+  await expect(page).toHaveURL(/workspace=[a-f0-9-]{36}/);
+  const hairUrl = page.url();
+  await expect(page.locator(".workspace strong")).toHaveText("헤어케어");
+  await expect(page.locator(".content-card")).toHaveCount(0);
+  await page.getByRole("button", { name: "보드 만들기", exact: true }).click();
+  await page.getByLabel("보드 이름", { exact: true }).fill("두피 진정 아이디어");
+  await page.getByRole("button", { name: "저장하기", exact: true }).click();
+  await expect(page.getByRole("dialog")).toHaveCount(0);
+  await page.reload();
+  await expect(page.getByRole("button", { name: /^두피 진정 아이디어/ })).toBeVisible();
+  const other = await context.newPage();
+  await other.goto("/");
+  await expect(other.locator(".workspace strong")).toHaveText("Fraijour");
+  await expect(other.locator(".content-card")).toHaveCount(12);
+  await expect(other.getByRole("button", { name: /^두피 진정 아이디어/ })).toHaveCount(0);
+  await expect(page).toHaveURL(hairUrl);
+  await page.getByLabel("워크스페이스 전환", { exact: true }).click();
+  await page.getByRole("button", { name: "Fraijour", exact: true }).click();
+  await expect(page.locator(".content-card")).toHaveCount(12);
+  await other.close();
+});

@@ -1224,9 +1224,14 @@ function Trend({ values }: { values: Analysis["daily"] }) {
               x2={width}
               y1={10 + y * (height - 20)}
               y2={10 + y * (height - 20)}
-              stroke="#e8edf4"
+              stroke="var(--color-fog)"
             />
-            <text x="0" y={14 + y * (height - 20)} fill="#8994a5" fontSize="11">
+            <text
+              x="0"
+              y={14 + y * (height - 20)}
+              fill="var(--color-slate)"
+              fontSize="11"
+            >
               {Math.round(max * (1 - y))}
             </text>
           </g>
@@ -1242,7 +1247,7 @@ function Trend({ values }: { values: Analysis["daily"] }) {
               width={Math.max(1, w * 0.65)}
               height={h}
               rx="2"
-              fill="#4677e8"
+              fill="var(--color-forest-ink)"
             >
               <title>
                 {d.date}: {d.count}건
@@ -1250,7 +1255,7 @@ function Trend({ values }: { values: Analysis["daily"] }) {
             </rect>
           );
         })}
-        <text x="30" y={height + 20} fontSize="11" fill="#8994a5">
+        <text x="30" y={height + 20} fontSize="11" fill="var(--color-slate)">
           {values[0]?.date}
         </text>
         <text
@@ -1258,7 +1263,7 @@ function Trend({ values }: { values: Analysis["daily"] }) {
           y={height + 20}
           textAnchor="end"
           fontSize="11"
-          fill="#8994a5"
+          fill="var(--color-slate)"
         >
           {values.at(-1)?.date}
         </text>
