@@ -52,10 +52,13 @@ import {
   type Workspace,
   type Source,
   type Board,
+  type WorkspaceInfo,
 } from "./model";
 import "./styles.css";
+import { WorkspacePicker } from "./Workspaces";
 import { Research, type ResearchPage } from "./Research";
 import "./research.css";
+import "./theme.css";
 type Page =
   "discover" | "brands" | "creators" | "bookmarks" | "sources" | ResearchPage;
 type Modal =
@@ -155,6 +158,9 @@ function App() {
     [error, setError] = useState(""),
     [toast, setToast] = useState("");
   const initial = new URLSearchParams(location.search);
+  const workspaceId = initial.get("workspace") || "default";
+  const [spaces, setSpaces] = useState<WorkspaceInfo[]>([]);
+  const [workspacePicker, setWorkspacePicker] = useState(false);
   const [page, setPage] = useState<Page>(
     ([...nav.map((n) => n.id), "sources"].includes(initial.get("page") || "")
       ? initial.get("page")
@@ -176,7 +182,9 @@ function App() {
     [busy, setBusy] = useState<string[]>([]);
   async function refresh() {
     try {
-      setWs(await api<Workspace>("/workspace"));
+      const [state, choices] = await Promise.all([api<Workspace>("/workspace"), api<WorkspaceInfo[]>("/workspaces")]);
+      setWs(state);
+      setSpaces(choices);
       setError("");
     } catch (e) {
       setError((e as Error).message);
@@ -195,7 +203,7 @@ function App() {
     return () => clearTimeout(id);
   }, [toast]);
   useEffect(() => {
-    const params = new URLSearchParams({ page });
+    const params = new URLSearchParams({ page, workspace: workspaceId });
     if (query) params.set("q", query);
     history.replaceState(null, "", "?" + params);
   }, [page, query]);
@@ -332,7 +340,7 @@ function App() {
       <aside className={"sidebar " + (sidebar ? "open" : "")}>
         <a
           className="logo"
-          href="?page=discover"
+          href={"?" + new URLSearchParams({ page: "discover", workspace: workspaceId })}
           onClick={(e) => {
             e.preventDefault();
             go("discover");
@@ -341,16 +349,19 @@ function App() {
           <span className="logo-mark">
             <Sparkles size={21} />
           </span>
-          catchmoment<span className="logo-dot">.</span>
+          <span className="logo-wordmark">
+            <strong>Aialy</strong>
+            <small>Contents Watcher</small>
+          </span>
         </a>
-        <div className="workspace">
-          <span className="workspace-avatar">C</span>
+        <button className="workspace" aria-label="워크스페이스 전환" onClick={() => setWorkspacePicker(true)}>
+          <span className="workspace-avatar">{(spaces.find((space) => space.id === workspaceId)?.name || "A").slice(0, 1)}</span>
           <div>
-            <strong>Fraijour workspace</strong>
-            <small>소셜 콘텐츠 모니터링</small>
+            <strong>{spaces.find((space) => space.id === workspaceId)?.name || "워크스페이스"}</strong>
+            <small>조사 공간 전환 · 추가</small>
           </div>
           <ChevronDown size={15} />
-        </div>
+        </button>
         <nav>
           {nav.map((n, i) => (
             <React.Fragment key={n.id}>
@@ -448,7 +459,7 @@ function App() {
             사용 가이드
           </button>
           <div className="account">
-            <span>C</span>
+            <span>A</span>
             <div>
               <strong>개인 워크스페이스</strong>
               <small>Local workspace</small>
@@ -467,7 +478,7 @@ function App() {
             >
               <Menu size={19} />
             </button>
-            <span>워크스페이스</span>
+            <span>{spaces.find((space) => space.id === workspaceId)?.name || "워크스페이스"}</span>
             <ChevronRight size={13} />
             <strong>{titles[page]}</strong>
           </div>
@@ -483,7 +494,7 @@ function App() {
             >
               <CircleHelp size={19} />
             </button>
-            <div className="profile-dot">C</div>
+            <div className="profile-dot">A</div>
           </div>
         </header>
         <main>
@@ -1012,9 +1023,7 @@ function App() {
             </>
           )}
           <footer>
-            <span>
-              catchmoment<span className="green">.</span>
-            </span>
+            <span>Aialy Contents Watcher</span>
             <span>매일의 발견이, 내일의 아이디어로.</span>
             <span>Instagram 원천 연결 · 개인 워크스페이스</span>
           </footer>
@@ -1054,6 +1063,7 @@ function App() {
           </button>
         </div>
       )}
+      {workspacePicker && <WorkspacePicker spaces={spaces} current={workspaceId} close={() => setWorkspacePicker(false)} />}
       {modal && (
         <ModalView
           key={modal.kind === "detail" ? modal.content.id : modal.kind}
@@ -1545,7 +1555,7 @@ function ModalView({
             : modal.kind === "deleteBoard"
               ? "보드를 삭제할까요?"
               : modal.kind === "guide"
-                ? "CatchMoment 사용 가이드"
+                ? "Aialy Contents Watcher 사용 가이드"
                 : modal.kind === "compare"
                   ? "콘텐츠 비교"
                   : modal.kind === "profile"
@@ -1711,8 +1721,8 @@ function ModalView({
       ) : modal.kind === "guide" ? (
         <div className="guide">
           <p>
-            CatchMoment는 Instagram에서 직접 수집한 콘텐츠를 탐색하고, 브랜드와
-            크리에이터를 관리하는 개인 워크스페이스입니다.
+            Aialy Contents Watcher는 Instagram에서 직접 수집한 콘텐츠를
+            탐색하고, 브랜드와 크리에이터를 관리하는 개인 워크스페이스입니다.
           </p>
           <ol>
             <li>

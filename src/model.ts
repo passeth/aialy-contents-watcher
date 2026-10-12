@@ -64,6 +64,7 @@ export type Run = {
   message: string | null;
   has_more: number;
 };
+export type WorkspaceInfo = { id: string; name: string; createdAt: string };
 export type Workspace = {
   content: Content[];
   sources: Source[];
@@ -102,7 +103,7 @@ export async function api<T>(
 ): Promise<T> {
   const response = await fetch("/api" + path, {
     method,
-    headers: { "Content-Type": "application/json" },
+    headers: { "Content-Type": "application/json", "X-Workspace-Id": new URLSearchParams(location.search).get("workspace") || "default" },
     body: body === undefined ? undefined : JSON.stringify(body),
   });
   const data = await response.json();
@@ -135,7 +136,7 @@ export function exportCsv(items: Content[]) {
   );
   const a = document.createElement("a");
   a.href = url;
-  a.download = `catchmoment-${new Date().toISOString().slice(0, 10)}.csv`;
+  a.download = `aialy-contents-watcher-${new Date().toISOString().slice(0, 10)}.csv`;
   a.click();
   URL.revokeObjectURL(url);
 }
