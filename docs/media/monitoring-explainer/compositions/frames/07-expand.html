@@ -1,0 +1,96 @@
+<template>
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.14.2/dist/gsap.min.js"></script>
+  <style>
+    @font-face { font-family: "Noto Sans KR"; src: url("assets/fonts/NotoSansKR-500.woff2") format("woff2"); font-weight: 500; font-display: block; }
+    @font-face { font-family: "Noto Sans KR"; src: url("assets/fonts/NotoSansKR-700.woff2") format("woff2"); font-weight: 700; font-display: block; }
+    @font-face { font-family: "Noto Sans KR"; src: url("assets/fonts/NotoSansKR-900.woff2") format("woff2"); font-weight: 900; font-display: block; }
+    /* shared chrome (identical in every step frame) */
+    .mx-topbar { position: absolute; left: 120px; right: 120px; top: 52px; height: 60px; }
+    .mx-step { position: absolute; left: 0; top: 0; height: 60px; padding: 0 28px; border-radius: 999px; background: #163300; color: #9fe870; font-weight: 700; font-size: 26px; line-height: 60px; white-space: nowrap; }
+    .mx-rail { position: absolute; left: 556px; top: 24px; width: 568px; height: 12px; display: flex; gap: 8px; }
+    .mx-seg { display: block; flex: none; width: 40px; height: 12px; border-radius: 6px; background: #e8ebe6; box-sizing: border-box; }
+    .mx-seg.mx-past { background: #163300; }
+    .mx-seg.mx-now { background: #9fe870; border: 2px solid #163300; }
+    .mx-example { position: absolute; right: 0; top: 0; height: 60px; padding: 0 26px; border-radius: 999px; background: #e8ebe6; color: #163300; font-weight: 700; font-size: 24px; line-height: 60px; white-space: nowrap; }
+    .mx-dot { display: inline-block; width: 14px; height: 14px; border-radius: 50%; background: #9fe870; border: 2px solid #163300; margin-right: 12px; vertical-align: middle; position: relative; top: -2px; box-sizing: border-box; }
+    .mx-h { position: absolute; left: 120px; top: 150px; font-weight: 900; font-size: 72px; line-height: 1.12; letter-spacing: -0.03em; color: #163300; white-space: nowrap; }
+
+    #root { position: absolute; inset: 0; overflow: hidden; font-family: "Noto Sans KR", sans-serif; color: #163300; }
+    .f07-bg { position: absolute; inset: 0; background: #ffffff; }
+    .f07-stage { position: absolute; inset: 0; }
+    .f07-svg { position: absolute; left: 0; top: 0; width: 1920px; height: 1080px; overflow: visible; }
+    .f07-node { position: absolute; height: 92px; padding: 0 40px; border-radius: 999px; background: #e8ebe6; font-weight: 900; font-size: 42px; line-height: 92px; letter-spacing: -0.02em; white-space: nowrap; }
+    .f07-node.f07-lime { background: #9fe870; }
+    .f07-hub { position: absolute; left: 960px; top: 570px; height: 128px; padding: 0 60px; border-radius: 999px; background: #163300; color: #9fe870; font-weight: 900; font-size: 66px; line-height: 128px; letter-spacing: -0.03em; white-space: nowrap; }
+    .f07-cr { position: absolute; width: 104px; height: 104px; border-radius: 50%; background: #ffffff; border: 5px solid #163300; box-sizing: border-box; font-weight: 900; font-size: 42px; line-height: 94px; text-align: center; }
+    .f07-crcap { position: absolute; width: 160px; text-align: center; font-weight: 700; font-size: 24px; color: #4d5e45; white-space: nowrap; }
+    .f07-cap { position: absolute; left: 960px; top: 846px; height: 64px; padding: 0 30px; border-radius: 999px; background: #e8ebe6; font-weight: 700; font-size: 28px; line-height: 64px; white-space: nowrap; }
+    .f07-cap b { font-weight: 900; }
+  </style>
+
+  <div data-hf-id="hf-o5oa" id="root" data-composition-id="07-expand" data-width="1920" data-height="1080" data-duration="7">
+    <div data-hf-id="hf-dvun" id="f07-bg" class="clip f07-bg" data-start="0" data-duration="7" data-track-index="0"></div>
+    <div data-hf-id="hf-1vjy" id="f07-stage" class="clip f07-stage" data-start="0" data-duration="7" data-track-index="1">
+      <div data-hf-id="hf-qfey" class="mx-topbar" data-layout-allow-overlap="">
+        <div data-hf-id="hf-fbyt" class="mx-step">07 / 12 · 표현 넓히기</div>
+        <div data-hf-id="hf-jjfs" class="mx-rail">
+          <i data-hf-id="hf-o4pb" class="mx-seg mx-past"></i><i data-hf-id="hf-e29b" class="mx-seg mx-past"></i><i data-hf-id="hf-dnya" class="mx-seg mx-past"></i><i data-hf-id="hf-d9n9" class="mx-seg mx-past"></i><i data-hf-id="hf-g1sg" class="mx-seg mx-past"></i><i data-hf-id="hf-fnhf" class="mx-seg mx-past"></i><i data-hf-id="hf-8hh1" class="mx-seg mx-now"></i><i data-hf-id="hf-pv73" class="mx-seg"></i><i data-hf-id="hf-5vm7" class="mx-seg"></i><i data-hf-id="hf-5hb6" class="mx-seg"></i><i data-hf-id="hf-5305" class="mx-seg"></i><i data-hf-id="hf-7v5c" class="mx-seg"></i>
+        </div>
+        <div data-hf-id="hf-wsc5" class="mx-example"><i data-hf-id="hf-1zpd" class="mx-dot"></i>교육용 예시 · 실제 측정 아님</div>
+      </div>
+      <div data-hf-id="hf-xjvb" class="mx-h" id="f07-h" data-layout-allow-overlap="">다른 표현으로 넓혀 본다</div>
+
+      <svg data-hf-id="hf-8ts3" class="f07-svg" viewBox="0 0 1920 1080" fill="none" stroke-linecap="round">
+        <g data-hf-id="hf-d7gp" stroke="#163300" stroke-width="5">
+          <path data-hf-id="hf-dx2b" id="f07-e1" d="M 900 540 C 760 470, 640 400, 560 400" />
+          <path data-hf-id="hf-9b0y" id="f07-e2" d="M 1020 540 C 1160 470, 1280 400, 1370 400" />
+          <path data-hf-id="hf-pfwo" id="f07-e3" d="M 880 600 C 740 680, 640 740, 560 740" />
+          <path data-hf-id="hf-5tc2" id="f07-e4" d="M 1040 600 C 1180 680, 1280 740, 1370 740" />
+        </g>
+        <g data-hf-id="hf-7aew" stroke="#4d5e45" stroke-width="4" stroke-dasharray="4 14">
+          <path data-hf-id="hf-mx70" id="f07-d1" d="M 214 560 C 260 470, 300 430, 330 420" />
+          <path data-hf-id="hf-0w6w" id="f07-d2" d="M 214 620 C 250 700, 290 730, 300 735" />
+          <path data-hf-id="hf-67ub" id="f07-d3" d="M 1706 560 C 1680 470, 1600 425, 1560 418" />
+          <path data-hf-id="hf-bgn8" id="f07-d4" d="M 1706 620 C 1680 700, 1650 730, 1640 735" />
+        </g>
+      </svg>
+
+      <div data-hf-id="hf-4fyb" class="f07-node f07-lime" id="f07-n1" style="left: 470px; top: 400px">탄력탱탱</div>
+      <div data-hf-id="hf-7sri" class="f07-node" id="f07-n2" style="left: 1450px; top: 400px">속건조</div>
+      <div data-hf-id="hf-hs35" class="f07-node" id="f07-n3" style="left: 430px; top: 740px">가벼운 제형</div>
+      <div data-hf-id="hf-a52h" class="f07-node" id="f07-n4" style="left: 1490px; top: 740px">산뜻한 마무리</div>
+      <div data-hf-id="hf-c238" class="f07-hub" id="f07-hub">수부지</div>
+
+      <div data-hf-id="hf-olf8" class="f07-cr" id="f07-c1" style="left: 128px; top: 538px">A</div>
+      <div data-hf-id="hf-fqds" class="f07-cr" id="f07-c2" style="left: 1688px; top: 538px">B</div>
+      <div data-hf-id="hf-mjyn" class="f07-crcap" id="f07-cc1" style="left: 100px; top: 652px">작성자</div>
+      <div data-hf-id="hf-d0vg" class="f07-crcap" id="f07-cc2" style="left: 1660px; top: 652px">작성자</div>
+
+      <div data-hf-id="hf-6mve" class="f07-cap" id="f07-cap"><b data-hf-id="hf-t35a">선 = 함께 등장한 관찰</b> · 의미는 원문에서 확인한다</div>
+    </div>
+  </div>
+
+  <script>
+    (function () {
+      const tl = gsap.timeline({ paused: true });
+      const center = { xPercent: -50, yPercent: -50 };
+      const edges = ["#f07-e1", "#f07-e2", "#f07-e3", "#f07-e4"].map((s) => document.querySelector(s));
+      edges.forEach((p) => { const l = p.getTotalLength(); p.style.strokeDasharray = l; p.dataset.len = l; });
+      const nodes = ["#f07-n1", "#f07-n2", "#f07-n3", "#f07-n4"];
+
+      tl.fromTo("#f07-h", { y: 24, opacity: 0 }, { y: 0, opacity: 1, duration: 0.5, ease: "power3.out" }, 0.1);
+      tl.fromTo("#f07-hub", { ...center, scale: 0.5, opacity: 0 }, { ...center, scale: 1, opacity: 1, duration: 0.6, ease: "back.out(1.5)" }, 0.45);
+      edges.forEach((p, i) => {
+        const at = 1.0 + i * 0.5;
+        tl.fromTo(p, { strokeDashoffset: +p.dataset.len }, { strokeDashoffset: 0, duration: 0.5, ease: "power2.inOut" }, at);
+        tl.fromTo(nodes[i], { ...center, scale: 0.5, opacity: 0 }, { ...center, scale: 1, opacity: 1, duration: 0.45, ease: "back.out(1.6)" }, at + 0.35);
+      });
+      tl.fromTo(["#f07-c1", "#f07-c2"], { scale: 0.4, opacity: 0 }, { scale: 1, opacity: 1, duration: 0.45, ease: "back.out(1.7)", stagger: 0.2 }, 3.3);
+      tl.fromTo(["#f07-cc1", "#f07-cc2"], { opacity: 0 }, { opacity: 1, duration: 0.35, stagger: 0.2 }, 3.5);
+      tl.fromTo(["#f07-d1", "#f07-d2", "#f07-d3", "#f07-d4"], { opacity: 0 }, { opacity: 1, duration: 0.4, ease: "power2.out", stagger: 0.12 }, 3.7);
+      tl.fromTo("#f07-cap", { ...center, y: 16, opacity: 0 }, { ...center, y: 0, opacity: 1, duration: 0.5, ease: "power3.out" }, 4.7);
+
+      window.__timelines["07-expand"] = tl;
+    })();
+  </script>
+</template>

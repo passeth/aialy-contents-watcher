@@ -1,0 +1,80 @@
+<template>
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.14.2/dist/gsap.min.js"></script>
+  <style>
+    @font-face { font-family: "Noto Sans KR"; src: url("assets/fonts/NotoSansKR-500.woff2") format("woff2"); font-weight: 500; font-display: block; }
+    @font-face { font-family: "Noto Sans KR"; src: url("assets/fonts/NotoSansKR-700.woff2") format("woff2"); font-weight: 700; font-display: block; }
+    @font-face { font-family: "Noto Sans KR"; src: url("assets/fonts/NotoSansKR-900.woff2") format("woff2"); font-weight: 900; font-display: block; }
+    /* shared chrome (identical in every step frame) */
+    .mx-topbar { position: absolute; left: 120px; right: 120px; top: 52px; height: 60px; }
+    .mx-step { position: absolute; left: 0; top: 0; height: 60px; padding: 0 28px; border-radius: 999px; background: #163300; color: #9fe870; font-weight: 700; font-size: 26px; line-height: 60px; white-space: nowrap; }
+    .mx-rail { position: absolute; left: 556px; top: 24px; width: 568px; height: 12px; display: flex; gap: 8px; }
+    .mx-seg { display: block; flex: none; width: 40px; height: 12px; border-radius: 6px; background: #e8ebe6; box-sizing: border-box; }
+    .mx-seg.mx-past { background: #163300; }
+    .mx-seg.mx-now { background: #9fe870; border: 2px solid #163300; }
+    .mx-example { position: absolute; right: 0; top: 0; height: 60px; padding: 0 26px; border-radius: 999px; background: #e8ebe6; color: #163300; font-weight: 700; font-size: 24px; line-height: 60px; white-space: nowrap; }
+    .mx-dot { display: inline-block; width: 14px; height: 14px; border-radius: 50%; background: #9fe870; border: 2px solid #163300; margin-right: 12px; vertical-align: middle; position: relative; top: -2px; box-sizing: border-box; }
+    .mx-h { position: absolute; left: 120px; top: 150px; font-weight: 900; font-size: 72px; line-height: 1.12; letter-spacing: -0.03em; color: #163300; white-space: nowrap; }
+
+    #root { position: absolute; inset: 0; overflow: hidden; font-family: "Noto Sans KR", sans-serif; color: #163300; }
+    .f11-bg { position: absolute; inset: 0; background: #ffffff; }
+    .f11-stage { position: absolute; inset: 0; }
+    .f11-card { position: absolute; top: 310px; width: 540px; height: 440px; border-radius: 28px; background: #e8ebe6; }
+    .f11-k1 { left: 120px; }
+    .f11-k2 { left: 690px; }
+    .f11-k3 { left: 1260px; }
+    .f11-ic { position: absolute; left: 44px; top: 44px; width: 120px; height: 120px; }
+    .f11-title { position: absolute; left: 44px; top: 196px; font-weight: 900; font-size: 54px; letter-spacing: -0.03em; white-space: nowrap; }
+    .f11-body { position: absolute; left: 44px; top: 282px; width: 452px; font-weight: 500; font-size: 32px; line-height: 1.45; }
+    .f11-body div { white-space: nowrap; }
+    .f11-strip { position: absolute; left: 120px; top: 792px; width: 1680px; height: 88px; border-radius: 999px; background: #9fe870; display: flex; align-items: center; justify-content: center; gap: 24px; font-weight: 900; font-size: 40px; letter-spacing: -0.02em; white-space: nowrap; }
+    .f11-strip i { font-style: normal; display: block; width: 56px; height: 56px; border-radius: 50%; background: #163300; position: relative; }
+    .f11-strip i::after { content: ""; position: absolute; left: 22px; top: 14px; width: 14px; height: 22px; border-right: 6px solid #9fe870; border-bottom: 6px solid #9fe870; transform: rotate(45deg); }
+  </style>
+
+  <div data-hf-id="hf-ivku" id="root" data-composition-id="11-experiment" data-width="1920" data-height="1080" data-duration="6.5">
+    <div data-hf-id="hf-4nq5" id="f11-bg" class="clip f11-bg" data-start="0" data-duration="6.5" data-track-index="0"></div>
+    <div data-hf-id="hf-nd2a" id="f11-stage" class="clip f11-stage" data-start="0" data-duration="6.5" data-track-index="1">
+      <div data-hf-id="hf-qfey" class="mx-topbar" data-layout-allow-overlap="">
+        <div data-hf-id="hf-3bx6" class="mx-step">11 / 12 · 작은 실험</div>
+        <div data-hf-id="hf-jjfs" class="mx-rail">
+          <i data-hf-id="hf-o4pb" class="mx-seg mx-past"></i><i data-hf-id="hf-e29b" class="mx-seg mx-past"></i><i data-hf-id="hf-dnya" class="mx-seg mx-past"></i><i data-hf-id="hf-d9n9" class="mx-seg mx-past"></i><i data-hf-id="hf-g1sg" class="mx-seg mx-past"></i><i data-hf-id="hf-fnhf" class="mx-seg mx-past"></i><i data-hf-id="hf-f96e" class="mx-seg mx-past"></i><i data-hf-id="hf-euvd" class="mx-seg mx-past"></i><i data-hf-id="hf-ba44" class="mx-seg mx-past"></i><i data-hf-id="hf-avt3" class="mx-seg mx-past"></i><i data-hf-id="hf-8hh1" class="mx-seg mx-now"></i><i data-hf-id="hf-pv73" class="mx-seg"></i>
+        </div>
+        <div data-hf-id="hf-wsc5" class="mx-example"><i data-hf-id="hf-1zpd" class="mx-dot"></i>교육용 예시 · 실제 측정 아님</div>
+      </div>
+      <div data-hf-id="hf-byam" class="mx-h" id="f11-h" data-layout-allow-overlap="">작게 실험한다</div>
+
+      <div data-hf-id="hf-rvqn" class="f11-card f11-k1" id="f11-k1">
+        <svg data-hf-id="hf-6f11" class="f11-ic" viewBox="0 0 120 120" fill="none" stroke="#163300" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"><rect data-hf-id="hf-fj3x" x="40" y="36" width="40" height="64" rx="12" fill="#9fe870" /><path data-hf-id="hf-n8jh" d="M50 36 V22 H70 V36" /><path data-hf-id="hf-qpr4" d="M14 100 H106" /></svg>
+        <div data-hf-id="hf-m73a" class="f11-title">소량 샘플</div>
+        <div data-hf-id="hf-oyil" class="f11-body"><div data-hf-id="hf-8dde">테스트용 소량으로</div><div data-hf-id="hf-1jxw">먼저 써 보게 한다</div></div>
+      </div>
+      <div data-hf-id="hf-w0av" class="f11-card f11-k2" id="f11-k2">
+        <svg data-hf-id="hf-b9hl" class="f11-ic" viewBox="0 0 120 120" fill="none" stroke="#163300" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"><rect data-hf-id="hf-25rd" x="10" y="26" width="46" height="68" rx="12" fill="#9fe870" /><rect data-hf-id="hf-51yo" x="64" y="26" width="46" height="68" rx="12" /><path data-hf-id="hf-t4wp" d="M24 70 L33 46 L42 70" /><path data-hf-id="hf-8m4m" d="M27 62 H39" /><path data-hf-id="hf-ffh1" d="M78 46 V70 H90 a6 6 0 0 0 0 -12 H78 M78 58 H88 a6 6 0 0 0 0 -12 H78" /></svg>
+        <div data-hf-id="hf-eyqj" class="f11-title">문구 A/B</div>
+        <div data-hf-id="hf-7vtd" class="f11-body"><div data-hf-id="hf-g6jt">같은 제품, 다른 메시지로</div><div data-hf-id="hf-oe0j">반응을 비교한다</div></div>
+      </div>
+      <div data-hf-id="hf-s0nf" class="f11-card f11-k3" id="f11-k3">
+        <svg data-hf-id="hf-cgeo" class="f11-ic" viewBox="0 0 120 120" fill="none" stroke="#163300" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"><rect data-hf-id="hf-puod" x="22" y="14" width="76" height="92" rx="12" /><path data-hf-id="hf-2pip" d="M40 40 H80" /><path data-hf-id="hf-lx2j" d="M40 60 H80" /><path data-hf-id="hf-bde7" d="M40 80 H64" /><circle data-hf-id="hf-bqzr" cx="92" cy="92" r="16" fill="#9fe870" /></svg>
+        <div data-hf-id="hf-z3fh" class="f11-title">반응 기록</div>
+        <div data-hf-id="hf-92qg" class="f11-body"><div data-hf-id="hf-x888">댓글·저장·문의를</div><div data-hf-id="hf-a7o0">날짜와 함께 메모한다</div></div>
+      </div>
+
+      <div data-hf-id="hf-wa26" class="f11-strip" id="f11-strip"><i data-hf-id="hf-wt6k"></i>크게 만들기 전에, 작게 확인한다</div>
+    </div>
+  </div>
+
+  <script>
+    (function () {
+      const tl = gsap.timeline({ paused: true });
+      tl.fromTo("#f11-h", { y: 24, opacity: 0 }, { y: 0, opacity: 1, duration: 0.5, ease: "power3.out" }, 0.1);
+      ["#f11-k1", "#f11-k2", "#f11-k3"].forEach((k, i) => {
+        const at = 0.9 + i * 0.9;
+        tl.fromTo(k, { y: 60, opacity: 0 }, { y: 0, opacity: 1, duration: 0.6, ease: "power3.out" }, at);
+        tl.fromTo(k + " .f11-ic", { scale: 0.6, opacity: 0 }, { scale: 1, opacity: 1, duration: 0.45, ease: "back.out(1.7)" }, at + 0.2);
+      });
+      tl.fromTo("#f11-strip", { y: 24, opacity: 0 }, { y: 0, opacity: 1, duration: 0.55, ease: "power3.out" }, 3.9);
+
+      window.__timelines["11-experiment"] = tl;
+    })();
+  </script>
+</template>

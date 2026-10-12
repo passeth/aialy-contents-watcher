@@ -1,0 +1,130 @@
+<template>
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.14.2/dist/gsap.min.js"></script>
+  <style>
+    @font-face { font-family: "Noto Sans KR"; src: url("assets/fonts/NotoSansKR-500.woff2") format("woff2"); font-weight: 500; font-display: block; }
+    @font-face { font-family: "Noto Sans KR"; src: url("assets/fonts/NotoSansKR-700.woff2") format("woff2"); font-weight: 700; font-display: block; }
+    @font-face { font-family: "Noto Sans KR"; src: url("assets/fonts/NotoSansKR-900.woff2") format("woff2"); font-weight: 900; font-display: block; }
+    /* shared chrome (identical in every step frame) */
+    .mx-topbar { position: absolute; left: 120px; right: 120px; top: 52px; height: 60px; }
+    .mx-step { position: absolute; left: 0; top: 0; height: 60px; padding: 0 28px; border-radius: 999px; background: #163300; color: #9fe870; font-weight: 700; font-size: 26px; line-height: 60px; white-space: nowrap; }
+    .mx-rail { position: absolute; left: 556px; top: 24px; width: 568px; height: 12px; display: flex; gap: 8px; }
+    .mx-seg { display: block; flex: none; width: 40px; height: 12px; border-radius: 6px; background: #e8ebe6; box-sizing: border-box; }
+    .mx-seg.mx-past { background: #163300; }
+    .mx-seg.mx-now { background: #9fe870; border: 2px solid #163300; }
+    .mx-example { position: absolute; right: 0; top: 0; height: 60px; padding: 0 26px; border-radius: 999px; background: #e8ebe6; color: #163300; font-weight: 700; font-size: 24px; line-height: 60px; white-space: nowrap; }
+    .mx-dot { display: inline-block; width: 14px; height: 14px; border-radius: 50%; background: #9fe870; border: 2px solid #163300; margin-right: 12px; vertical-align: middle; position: relative; top: -2px; box-sizing: border-box; }
+    .mx-h { position: absolute; left: 120px; top: 150px; font-weight: 900; font-size: 72px; line-height: 1.12; letter-spacing: -0.03em; color: #163300; white-space: nowrap; }
+
+    #root { position: absolute; inset: 0; overflow: hidden; font-family: "Noto Sans KR", sans-serif; color: #163300; }
+    .f02-bg { position: absolute; inset: 0; background: #ffffff; }
+    .f02-stage { position: absolute; inset: 0; }
+    .f02-cats { position: absolute; left: 170px; top: 400px; width: 1580px; height: 200px; }
+    .f02-cat { position: absolute; top: 0; width: 500px; height: 200px; border-radius: 999px; background: #e8ebe6; display: flex; align-items: center; gap: 28px; padding-left: 44px; box-sizing: border-box; }
+    .f02-cat svg { flex: none; width: 112px; height: 112px; }
+    .f02-cat span { font-weight: 900; font-size: 56px; letter-spacing: -0.03em; }
+    .f02-c1 { left: 0; }
+    .f02-c2 { left: 540px; }
+    .f02-c3 { left: 1080px; }
+    .f02-catfill { position: absolute; inset: 0; border-radius: 999px; background: #9fe870; }
+    .f02-cat > svg, .f02-cat > span { position: relative; }
+    .f02-note1 { position: absolute; left: 120px; top: 660px; font-weight: 500; font-size: 34px; color: #4d5e45; white-space: nowrap; }
+    .f02-crumb { position: absolute; left: 120px; top: 300px; height: 64px; padding: 0 30px 0 22px; border-radius: 999px; background: #9fe870; display: flex; align-items: center; gap: 14px; font-weight: 700; font-size: 30px; white-space: nowrap; }
+    .f02-crumb svg { width: 40px; height: 40px; }
+    .f02-card { position: absolute; left: 120px; top: 400px; width: 1680px; height: 360px; border-radius: 28px; background: #e8ebe6; }
+    .f02-q { position: absolute; left: 200px; top: 452px; font-weight: 900; font-size: 74px; line-height: 1.3; letter-spacing: -0.03em; color: #163300; }
+    .f02-q div { white-space: nowrap; height: 96px; }
+    .f02-q span { display: inline-block; }
+    .f02-qmark { position: absolute; right: 200px; top: 440px; width: 250px; height: 250px; border-radius: 50%; background: #163300; color: #9fe870; font-weight: 900; font-size: 180px; line-height: 250px; text-align: center; }
+    .f02-note2 { position: absolute; left: 120px; top: 800px; height: 64px; padding: 0 30px; border-radius: 999px; border: 3px solid #163300; box-sizing: border-box; font-weight: 700; font-size: 30px; line-height: 58px; white-space: nowrap; }
+  </style>
+
+  <div data-hf-id="hf-l2c7" id="root" data-composition-id="02-workspace-question" data-width="1920" data-height="1080" data-duration="8.5">
+    <div data-hf-id="hf-23nj" id="f02-bg" class="clip f02-bg" data-start="0" data-duration="8.5" data-track-index="0"></div>
+    <div data-hf-id="hf-dpdk" id="f02-stage" class="clip f02-stage" data-start="0" data-duration="8.5" data-track-index="1">
+      <div data-hf-id="hf-qfey" class="mx-topbar" data-layout-allow-overlap="">
+        <div data-hf-id="hf-32ao" class="mx-step" id="f02-step1">01 / 12 · 워크스페이스</div>
+        <div data-hf-id="hf-cx6e" class="mx-step" id="f02-step2">02 / 12 · 질문</div>
+        <div data-hf-id="hf-jjfs" class="mx-rail">
+          <i data-hf-id="hf-u4hy" class="mx-seg mx-now" id="f02-seg1"></i><i data-hf-id="hf-k1ir" class="mx-seg" id="f02-seg2"></i><i data-hf-id="hf-pv73" class="mx-seg"></i><i data-hf-id="hf-5vm7" class="mx-seg"></i><i data-hf-id="hf-5hb6" class="mx-seg"></i><i data-hf-id="hf-5305" class="mx-seg"></i><i data-hf-id="hf-7v5c" class="mx-seg"></i><i data-hf-id="hf-7gub" class="mx-seg"></i><i data-hf-id="hf-72ja" class="mx-seg"></i><i data-hf-id="hf-6o89" class="mx-seg"></i><i data-hf-id="hf-33h0" class="mx-seg"></i><i data-hf-id="hf-2p5z" class="mx-seg"></i>
+        </div>
+        <div data-hf-id="hf-wsc5" class="mx-example"><i data-hf-id="hf-1zpd" class="mx-dot"></i>교육용 예시 · 실제 측정 아님</div>
+      </div>
+
+      <div data-hf-id="hf-expc" class="mx-h" id="f02-h1" data-layout-allow-overlap="">우리 제품군부터 고른다</div>
+      <div data-hf-id="hf-heso" class="mx-h" id="f02-h2" data-layout-allow-overlap="">시장에 질문을 던진다</div>
+
+      <div data-hf-id="hf-5v3y" class="f02-cats">
+        <div data-hf-id="hf-gl3b" class="f02-cat f02-c1" id="f02-c1">
+          <div data-hf-id="hf-db48" class="f02-catfill" id="f02-fill"></div>
+          <svg data-hf-id="hf-mu2x" viewBox="0 0 112 112" fill="none" stroke="#163300" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"><path data-hf-id="hf-ounp" d="M56 14 C56 14 26 50 26 70 a30 30 0 0 0 60 0 C86 50 56 14 56 14 Z" /><path data-hf-id="hf-fxr9" d="M42 72 a14 14 0 0 0 12 14" /></svg>
+          <span data-hf-id="hf-kf8h">스킨케어</span>
+        </div>
+        <div data-hf-id="hf-hru3" class="f02-cat f02-c2" id="f02-c2">
+          <svg data-hf-id="hf-3dml" viewBox="0 0 112 112" fill="none" stroke="#163300" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"><rect data-hf-id="hf-scjr" x="34" y="40" width="44" height="60" rx="12" /><path data-hf-id="hf-mcul" d="M48 40 V28 H64 V40" /><path data-hf-id="hf-qio8" d="M56 28 V16 H76" /></svg>
+          <span data-hf-id="hf-1d1h">바디케어</span>
+        </div>
+        <div data-hf-id="hf-532f" class="f02-cat f02-c3" id="f02-c3">
+          <svg data-hf-id="hf-4kjo" viewBox="0 0 112 112" fill="none" stroke="#163300" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"><path data-hf-id="hf-n9c9" d="M24 30 C44 18 68 42 88 30" /><path data-hf-id="hf-zali" d="M24 56 C44 44 68 68 88 56" /><path data-hf-id="hf-blxo" d="M24 82 C44 70 68 94 88 82" /></svg>
+          <span data-hf-id="hf-wjp1">헤어케어</span>
+        </div>
+      </div>
+      <div data-hf-id="hf-ct3k" class="f02-note1" id="f02-note1">처음엔 넓게 말고, 우리 제품이 속한 한 영역에서.</div>
+
+      <div data-hf-id="hf-z3sq" class="f02-crumb" id="f02-crumb">
+        <svg data-hf-id="hf-3kzb" viewBox="0 0 112 112" fill="none" stroke="#163300" stroke-width="9" stroke-linecap="round" stroke-linejoin="round"><path data-hf-id="hf-6fl5" d="M56 14 C56 14 26 50 26 70 a30 30 0 0 0 60 0 C86 50 56 14 56 14 Z" /></svg>
+        스킨케어 워크스페이스
+      </div>
+      <div data-hf-id="hf-807u" class="f02-card" id="f02-card"></div>
+      <div data-hf-id="hf-dtsy" class="f02-q" id="f02-q">
+        <div data-hf-id="hf-ibf2" id="f02-q1"></div>
+        <div data-hf-id="hf-abbx" id="f02-q2"></div>
+      </div>
+      <div data-hf-id="hf-o755" class="f02-qmark" id="f02-qmark">?</div>
+      <div data-hf-id="hf-dgaf" class="f02-note2" id="f02-note2">결론 말고, 확인할 수 있는 질문부터</div>
+    </div>
+  </div>
+
+  <script>
+    (function () {
+      const tl = gsap.timeline({ paused: true });
+      // build the typed question one syllable at a time
+      const lines = [["f02-q1", "요즘 수분크림을 고르는 사람들은"], ["f02-q2", "어떤 말로 이야기할까?"]];
+      const chars = [];
+      lines.forEach(([id, text]) => {
+        const host = document.getElementById(id);
+        for (const ch of text) {
+          const s = document.createElement("span");
+          s.textContent = ch === " " ? " " : ch;
+          host.appendChild(s);
+          chars.push(s);
+        }
+      });
+
+      // phase 1 — pick a workspace
+      tl.fromTo("#f02-h1", { y: 24, opacity: 0 }, { y: 0, opacity: 1, duration: 0.5, ease: "power3.out" }, 0.1);
+      tl.fromTo(["#f02-c1", "#f02-c2", "#f02-c3"], { y: 60, opacity: 0 }, { y: 0, opacity: 1, duration: 0.6, ease: "power3.out", stagger: 0.25 }, 0.9);
+      tl.fromTo("#f02-note1", { opacity: 0 }, { opacity: 1, duration: 0.5, ease: "power2.out" }, 1.8);
+      tl.fromTo("#f02-fill", { scaleX: 0, transformOrigin: "left center" }, { scaleX: 1, duration: 0.55, ease: "power3.inOut" }, 2.6);
+      tl.fromTo("#f02-c1", { scale: 1 }, { scale: 1.06, duration: 0.5, ease: "power3.out", immediateRender: false }, 2.6);
+      tl.fromTo(["#f02-c2", "#f02-c3"], { opacity: 1 }, { opacity: 0.35, duration: 0.5, ease: "power2.out", immediateRender: false }, 2.75);
+
+      // phase 2 — step swap, workspace collapses into a breadcrumb
+      tl.fromTo("#f02-step1", { opacity: 1 }, { opacity: 0, duration: 0.35, ease: "power2.inOut" }, 3.8);
+      tl.fromTo("#f02-step2", { opacity: 0 }, { opacity: 1, duration: 0.35, ease: "power2.inOut" }, 3.8);
+      tl.fromTo("#f02-seg1", { backgroundColor: "#9fe870", borderWidth: 2 }, { backgroundColor: "#163300", borderWidth: 0, duration: 0.3 }, 3.8);
+      tl.fromTo("#f02-seg2", { backgroundColor: "#e8ebe6", borderWidth: 0 }, { backgroundColor: "#9fe870", borderWidth: 2, duration: 0.3 }, 3.8);
+      tl.fromTo("#f02-h1", { y: 0 }, { y: -30, opacity: 0, duration: 0.35, ease: "power2.in", immediateRender: false }, 3.8);
+      tl.fromTo("#f02-h2", { y: 30, opacity: 0 }, { y: 0, opacity: 1, duration: 0.5, ease: "power3.out" }, 4.05);
+      tl.to(["#f02-c1", "#f02-c2", "#f02-c3", "#f02-note1"], { y: -40, opacity: 0, duration: 0.4, ease: "power2.in", stagger: 0.05 }, 3.85);
+      tl.fromTo("#f02-crumb", { x: -30, opacity: 0 }, { x: 0, opacity: 1, duration: 0.5, ease: "power3.out" }, 4.25);
+
+      // phase 3 — the question types into a card
+      tl.fromTo("#f02-card", { scaleY: 0.2, opacity: 0, transformOrigin: "50% 0%" }, { scaleY: 1, opacity: 1, duration: 0.55, ease: "power3.out" }, 4.6);
+      tl.fromTo("#f02-qmark", { scale: 0.4, opacity: 0 }, { scale: 1, opacity: 1, duration: 0.6, ease: "power3.out" }, 4.9);
+      tl.fromTo(chars, { opacity: 0 }, { opacity: 1, duration: 0.01, stagger: 0.055, ease: "none" }, 5.1);
+      tl.fromTo("#f02-note2", { y: 16, opacity: 0 }, { y: 0, opacity: 1, duration: 0.5, ease: "power3.out" }, 6.9);
+
+      window.__timelines["02-workspace-question"] = tl;
+    })();
+  </script>
+</template>

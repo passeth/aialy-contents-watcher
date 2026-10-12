@@ -1,0 +1,64 @@
+<template>
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.14.2/dist/gsap.min.js"></script>
+  <style>
+    @font-face { font-family: "Noto Sans KR"; src: url("assets/fonts/NotoSansKR-500.woff2") format("woff2"); font-weight: 500; font-display: block; }
+    @font-face { font-family: "Noto Sans KR"; src: url("assets/fonts/NotoSansKR-700.woff2") format("woff2"); font-weight: 700; font-display: block; }
+    @font-face { font-family: "Noto Sans KR"; src: url("assets/fonts/NotoSansKR-900.woff2") format("woff2"); font-weight: 900; font-display: block; }
+    #root { position: absolute; inset: 0; overflow: hidden; font-family: "Noto Sans KR", sans-serif; color: #ffffff; }
+    .f01-bg { position: absolute; inset: 0; background: #163300; }
+    .f01-stage { position: absolute; inset: 0; }
+    .f01-ring { position: absolute; right: -220px; top: -260px; width: 900px; height: 900px; border-radius: 50%; border: 3px solid #2c4a1a; }
+    .f01-ring2 { position: absolute; right: -60px; top: -100px; width: 580px; height: 580px; border-radius: 50%; border: 3px solid #2c4a1a; }
+    .f01-eyebrow { position: absolute; left: 120px; top: 200px; height: 64px; padding: 0 30px; border-radius: 999px; background: #9fe870; color: #163300; font-weight: 700; font-size: 30px; line-height: 64px; white-space: nowrap; }
+    .f01-line { position: absolute; left: 120px; font-weight: 900; font-size: 132px; line-height: 1.04; letter-spacing: -0.035em; white-space: nowrap; color: #ffffff; }
+    .f01-l1 { top: 312px; }
+    .f01-l2 { top: 462px; }
+    .f01-w { display: inline-block; margin-right: 0.22em; }
+    .f01-w:last-child { margin-right: 0; }
+    .f01-lime { color: #9fe870; position: relative; }
+    .f01-under { position: absolute; left: 0; right: 0; bottom: -6px; height: 14px; border-radius: 7px; background: #9fe870; transform-origin: left center; }
+    .f01-lane { position: absolute; left: 120px; right: 0; top: 700px; height: 76px; display: flex; gap: 24px; }
+    .f01-pill { flex: none; height: 76px; padding: 0 34px; border-radius: 999px; background: #24410f; color: #e8ebe6; font-weight: 700; font-size: 34px; line-height: 76px; white-space: nowrap; }
+    .f01-pill i { font-style: normal; color: #9fe870; margin-right: 10px; }
+    .f01-sub { position: absolute; left: 120px; top: 830px; font-weight: 500; font-size: 38px; line-height: 1.3; color: #e8ebe6; white-space: nowrap; }
+    .f01-sub b { font-weight: 900; color: #9fe870; }
+  </style>
+
+  <div data-hf-id="hf-q93h" id="root" data-composition-id="01-hook" data-width="1920" data-height="1080" data-duration="6.1">
+    <div data-hf-id="hf-uu1d" id="f01-bg" class="clip f01-bg" data-start="0" data-duration="6.1" data-track-index="0"></div>
+    <div data-hf-id="hf-nvos" id="f01-stage" class="clip f01-stage" data-start="0" data-duration="6.1" data-track-index="1">
+      <div data-hf-id="hf-seln" class="f01-ring" id="f01-ring" data-layout-allow-overflow=""></div>
+      <div data-hf-id="hf-vclt" class="f01-ring2" id="f01-ring2" data-layout-allow-overflow=""></div>
+      <div data-hf-id="hf-bu0i" class="f01-eyebrow" id="f01-eyebrow">화장품 제조사를 위한 브랜드 마케팅 기초</div>
+      <div data-hf-id="hf-0si0" class="f01-line f01-l1" id="f01-l1"><span data-hf-id="hf-x5x4" class="f01-w">콘텐츠</span><span data-hf-id="hf-qwhf" class="f01-w f01-lime" id="f01-key">모니터링,<span data-hf-id="hf-y1bb" class="f01-under" id="f01-under"></span></span></div>
+      <div data-hf-id="hf-7jdw" class="f01-line f01-l2" id="f01-l2"><span data-hf-id="hf-7xq4" class="f01-w">어디서부터</span><span data-hf-id="hf-iyxw" class="f01-w">시작할까?</span></div>
+      <div data-hf-id="hf-xlt6" class="f01-lane" id="f01-lane">
+        <div data-hf-id="hf-g327" class="f01-pill"><i data-hf-id="hf-2sww">“</i>촉촉한데 가벼운</div>
+        <div data-hf-id="hf-axod" class="f01-pill"><i data-hf-id="hf-rt94">“</i>속당김</div>
+        <div data-hf-id="hf-ext4" class="f01-pill"><i data-hf-id="hf-qmc1">“</i>끈적임 없이</div>
+        <div data-hf-id="hf-3w7c" class="f01-pill"><i data-hf-id="hf-r0n2">“</i>흡수 빠른</div>
+        <div data-hf-id="hf-dquw" class="f01-pill"><i data-hf-id="hf-ptpz">“</i>피부결 정돈</div>
+      </div>
+      <div data-hf-id="hf-80ww" class="f01-sub" id="f01-sub">고객이 쓰는 <b data-hf-id="hf-xncf">말</b>에서, 다음 제품의 단서를 찾는 법</div>
+    </div>
+  </div>
+
+  <script>
+    (function () {
+      const tl = gsap.timeline({ paused: true });
+      const words1 = document.querySelectorAll("#f01-l1 .f01-w");
+      const words2 = document.querySelectorAll("#f01-l2 .f01-w");
+      const pills = document.querySelectorAll("#f01-lane .f01-pill");
+
+      tl.fromTo(["#f01-ring", "#f01-ring2"], { scale: 0.9, opacity: 0 }, { scale: 1, opacity: 1, duration: 1.6, ease: "power2.out", stagger: 0.15 }, 0);
+      tl.fromTo("#f01-eyebrow", { y: 18, opacity: 0 }, { y: 0, opacity: 1, duration: 0.5, ease: "power3.out" }, 0.05);
+      tl.fromTo(words1, { y: 70, opacity: 0 }, { y: 0, opacity: 1, duration: 0.6, ease: "power3.out", stagger: 0.22 }, 0.25);
+      tl.fromTo(words2, { y: 70, opacity: 0 }, { y: 0, opacity: 1, duration: 0.6, ease: "power3.out", stagger: 0.22 }, 1.5);
+      tl.fromTo("#f01-under", { scaleX: 0 }, { scaleX: 1, duration: 0.6, ease: "power3.inOut" }, 2.2);
+      tl.fromTo(pills, { x: 260, opacity: 0 }, { x: 0, opacity: 1, duration: 0.7, ease: "power3.out", stagger: 0.14 }, 3.0);
+      tl.fromTo("#f01-sub", { y: 20, opacity: 0 }, { y: 0, opacity: 1, duration: 0.6, ease: "power3.out" }, 4.1);
+
+      window.__timelines["01-hook"] = tl;
+    })();
+  </script>
+</template>

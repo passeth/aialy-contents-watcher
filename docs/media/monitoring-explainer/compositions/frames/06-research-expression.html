@@ -1,0 +1,116 @@
+<template>
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.14.2/dist/gsap.min.js"></script>
+  <style>
+    @font-face { font-family: "Noto Sans KR"; src: url("assets/fonts/NotoSansKR-500.woff2") format("woff2"); font-weight: 500; font-display: block; }
+    @font-face { font-family: "Noto Sans KR"; src: url("assets/fonts/NotoSansKR-700.woff2") format("woff2"); font-weight: 700; font-display: block; }
+    @font-face { font-family: "Noto Sans KR"; src: url("assets/fonts/NotoSansKR-900.woff2") format("woff2"); font-weight: 900; font-display: block; }
+    /* shared chrome (identical in every step frame) */
+    .mx-topbar { position: absolute; left: 120px; right: 120px; top: 52px; height: 60px; }
+    .mx-step { position: absolute; left: 0; top: 0; height: 60px; padding: 0 28px; border-radius: 999px; background: #163300; color: #9fe870; font-weight: 700; font-size: 26px; line-height: 60px; white-space: nowrap; }
+    .mx-rail { position: absolute; left: 556px; top: 24px; width: 568px; height: 12px; display: flex; gap: 8px; }
+    .mx-seg { display: block; flex: none; width: 40px; height: 12px; border-radius: 6px; background: #e8ebe6; box-sizing: border-box; }
+    .mx-seg.mx-past { background: #163300; }
+    .mx-seg.mx-now { background: #9fe870; border: 2px solid #163300; }
+    .mx-example { position: absolute; right: 0; top: 0; height: 60px; padding: 0 26px; border-radius: 999px; background: #e8ebe6; color: #163300; font-weight: 700; font-size: 24px; line-height: 60px; white-space: nowrap; }
+    .mx-dot { display: inline-block; width: 14px; height: 14px; border-radius: 50%; background: #9fe870; border: 2px solid #163300; margin-right: 12px; vertical-align: middle; position: relative; top: -2px; box-sizing: border-box; }
+    .mx-h { position: absolute; left: 120px; top: 150px; font-weight: 900; font-size: 72px; line-height: 1.12; letter-spacing: -0.03em; color: #163300; white-space: nowrap; }
+
+    #root { position: absolute; inset: 0; overflow: hidden; font-family: "Noto Sans KR", sans-serif; color: #163300; }
+    .f06-bg { position: absolute; inset: 0; background: #ffffff; }
+    .f06-stage { position: absolute; inset: 0; }
+    .f06-label { position: absolute; font-weight: 700; font-size: 28px; color: #4d5e45; white-space: nowrap; }
+    .f06-l-old { left: 120px; top: 300px; }
+    .f06-chips { position: absolute; left: 120px; top: 350px; display: flex; gap: 18px; }
+    .f06-chip { position: relative; flex: none; height: 76px; padding: 0 32px; border-radius: 999px; background: #e8ebe6; font-weight: 700; font-size: 36px; line-height: 76px; white-space: nowrap; }
+    .f06-strike { position: absolute; left: 18px; right: 18px; top: 35px; height: 6px; border-radius: 3px; background: #163300; transform-origin: 0% 50%; }
+    .f06-unlock { position: absolute; left: 120px; top: 452px; display: flex; align-items: center; gap: 14px; font-weight: 900; font-size: 32px; white-space: nowrap; }
+    .f06-unlock svg { width: 40px; height: 40px; }
+    .f06-bar { position: absolute; left: 120px; top: 530px; width: 780px; height: 124px; border-radius: 999px; border: 5px solid #163300; box-sizing: border-box; background: #ffffff; }
+    .f06-mag { position: absolute; left: 40px; top: 30px; width: 56px; height: 56px; }
+    .f06-query { position: absolute; left: 120px; top: 14px; height: 86px; padding: 0 36px; border-radius: 999px; background: #9fe870; font-weight: 900; font-size: 50px; line-height: 86px; letter-spacing: -0.03em; white-space: nowrap; }
+    .f06-hint { position: absolute; left: 120px; top: 690px; font-weight: 500; font-size: 30px; color: #4d5e45; white-space: nowrap; }
+    .f06-svg { position: absolute; left: 0; top: 0; width: 1920px; height: 1080px; overflow: visible; }
+    .f06-l-co { left: 1100px; top: 300px; }
+    .f06-hit { position: absolute; left: 1100px; top: 350px; height: 120px; padding: 0 54px; border-radius: 999px; background: #9fe870; font-weight: 900; font-size: 72px; line-height: 120px; letter-spacing: -0.03em; white-space: nowrap; }
+    .f06-ava { position: absolute; top: 600px; width: 130px; height: 130px; border-radius: 50%; background: #e8ebe6; border: 5px solid #163300; box-sizing: border-box; font-weight: 900; font-size: 52px; line-height: 120px; text-align: center; }
+    .f06-a1 { left: 1100px; }
+    .f06-a2 { left: 1330px; }
+    .f06-a3 { left: 1560px; }
+    .f06-acap { position: absolute; top: 744px; width: 130px; text-align: center; font-weight: 700; font-size: 26px; color: #4d5e45; white-space: nowrap; }
+    .f06-l-cr { left: 1100px; top: 810px; color: #163300; font-weight: 900; font-size: 30px; }
+  </style>
+
+  <div data-hf-id="hf-mnac" id="root" data-composition-id="06-research-expression" data-width="1920" data-height="1080" data-duration="8">
+    <div data-hf-id="hf-4w18" id="f06-bg" class="clip f06-bg" data-start="0" data-duration="8" data-track-index="0"></div>
+    <div data-hf-id="hf-8rqt" id="f06-stage" class="clip f06-stage" data-start="0" data-duration="8" data-track-index="1">
+      <div data-hf-id="hf-qfey" class="mx-topbar" data-layout-allow-overlap="">
+        <div data-hf-id="hf-4qgk" class="mx-step">06 / 12 · 표현으로 재검색</div>
+        <div data-hf-id="hf-jjfs" class="mx-rail">
+          <i data-hf-id="hf-o4pb" class="mx-seg mx-past"></i><i data-hf-id="hf-e29b" class="mx-seg mx-past"></i><i data-hf-id="hf-dnya" class="mx-seg mx-past"></i><i data-hf-id="hf-d9n9" class="mx-seg mx-past"></i><i data-hf-id="hf-g1sg" class="mx-seg mx-past"></i><i data-hf-id="hf-8hh1" class="mx-seg mx-now"></i><i data-hf-id="hf-pv73" class="mx-seg"></i><i data-hf-id="hf-5vm7" class="mx-seg"></i><i data-hf-id="hf-5hb6" class="mx-seg"></i><i data-hf-id="hf-5305" class="mx-seg"></i><i data-hf-id="hf-7v5c" class="mx-seg"></i><i data-hf-id="hf-7gub" class="mx-seg"></i>
+        </div>
+        <div data-hf-id="hf-wsc5" class="mx-example"><i data-hf-id="hf-1zpd" class="mx-dot"></i>교육용 예시 · 실제 측정 아님</div>
+      </div>
+      <div data-hf-id="hf-p9tc" class="mx-h" id="f06-h" data-layout-allow-overlap="">그 표현으로 다시 검색한다</div>
+
+      <div data-hf-id="hf-kzt2" class="f06-label f06-l-old" id="f06-lold">처음 조건</div>
+      <div data-hf-id="hf-jq8i" class="f06-chips" id="f06-chips">
+        <div data-hf-id="hf-vc1s" class="f06-chip" id="f06-c1">수분크림<i data-hf-id="hf-u56g" class="f06-strike" id="f06-s1"></i></div>
+        <div data-hf-id="hf-7xm4" class="f06-chip" id="f06-c2">비교 브랜드 A<i data-hf-id="hf-2t2b" class="f06-strike" id="f06-s2"></i></div>
+      </div>
+      <div data-hf-id="hf-46m2" class="f06-unlock" id="f06-unlock">
+        <svg data-hf-id="hf-2fwz" viewBox="0 0 40 40" fill="none" stroke="#163300" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"><path data-hf-id="hf-pyps" d="M20 6 V30" /><path data-hf-id="hf-prt9" d="M10 21 L20 31 L30 21" /></svg>
+        조건을 풀고, 발견한 말만으로
+      </div>
+      <div data-hf-id="hf-wi0a" class="f06-bar" id="f06-bar">
+        <svg data-hf-id="hf-t9os" class="f06-mag" viewBox="0 0 58 58" fill="none" stroke="#163300" stroke-width="7" stroke-linecap="round"><circle data-hf-id="hf-ez36" cx="24" cy="24" r="17" /><path data-hf-id="hf-lh9l" d="M37 37 L52 52" /></svg>
+        <div data-hf-id="hf-xd54" class="f06-query" id="f06-query">수부지</div>
+      </div>
+      <div data-hf-id="hf-pyzg" class="f06-hint" id="f06-hint">브랜드 밖에서도 이 말이 쓰이는지 본다</div>
+
+      <svg data-hf-id="hf-rvwq" class="f06-svg" viewBox="0 0 1920 1080" fill="none" stroke="#163300" stroke-width="5" stroke-linecap="round">
+        <path data-hf-id="hf-bkyw" id="f06-p0" d="M 900 592 C 1000 592, 1000 410, 1094 410" />
+        <path data-hf-id="hf-s9b8" id="f06-p1" d="M 1165 470 L 1165 596" />
+        <path data-hf-id="hf-kj7p" id="f06-p2" d="M 1300 470 C 1300 540, 1395 530, 1395 596" />
+        <path data-hf-id="hf-qqk9" id="f06-p3" d="M 1420 470 C 1420 540, 1625 520, 1625 596" />
+      </svg>
+      <div data-hf-id="hf-n4eo" class="f06-label f06-l-co" id="f06-lco">함께 쓰인 다른 표현</div>
+      <div data-hf-id="hf-4qk7" class="f06-hit" id="f06-hit">탄력탱탱</div>
+      <div data-hf-id="hf-4ylg" class="f06-ava f06-a1" id="f06-a1">A</div>
+      <div data-hf-id="hf-s2l9" class="f06-ava f06-a2" id="f06-a2">B</div>
+      <div data-hf-id="hf-n9yq" class="f06-ava f06-a3" id="f06-a3">C</div>
+      <div data-hf-id="hf-qbcu" class="f06-acap" style="left: 1100px" id="f06-ac1">작성자 A</div>
+      <div data-hf-id="hf-oylt" class="f06-acap" style="left: 1330px" id="f06-ac2">작성자 B</div>
+      <div data-hf-id="hf-mrpo" class="f06-acap" style="left: 1560px" id="f06-ac3">작성자 C</div>
+      <div data-hf-id="hf-j2bg" class="f06-label f06-l-cr" id="f06-lcr">이 표현을 쓰는 작성자들</div>
+    </div>
+  </div>
+
+  <script>
+    (function () {
+      const tl = gsap.timeline({ paused: true });
+      const paths = ["#f06-p0", "#f06-p1", "#f06-p2", "#f06-p3"].map((s) => document.querySelector(s));
+      paths.forEach((p) => { const l = p.getTotalLength(); p.style.strokeDasharray = l; p.dataset.len = l; });
+      const draw = (p, at, d) => tl.fromTo(p, { strokeDashoffset: +p.dataset.len }, { strokeDashoffset: 0, duration: d, ease: "power2.inOut" }, at);
+
+      tl.fromTo("#f06-h", { y: 24, opacity: 0 }, { y: 0, opacity: 1, duration: 0.5, ease: "power3.out" }, 0.1);
+      tl.fromTo(["#f06-lold", "#f06-c1", "#f06-c2"], { y: 20, opacity: 0 }, { y: 0, opacity: 1, duration: 0.45, ease: "power3.out", stagger: 0.12 }, 0.6);
+      tl.fromTo(["#f06-s1", "#f06-s2"], { scaleX: 0 }, { scaleX: 1, duration: 0.4, ease: "power2.inOut", stagger: 0.18 }, 1.5);
+      tl.fromTo(["#f06-c1", "#f06-c2"], { opacity: 1 }, { opacity: 0.4, duration: 0.4, ease: "power2.out", immediateRender: false }, 1.9);
+      tl.fromTo("#f06-unlock", { y: -12, opacity: 0 }, { y: 0, opacity: 1, duration: 0.45, ease: "power3.out" }, 2.1);
+      tl.fromTo("#f06-bar", { scaleX: 0.6, opacity: 0, transformOrigin: "0% 50%" }, { scaleX: 1, opacity: 1, duration: 0.5, ease: "power3.out" }, 2.4);
+      tl.fromTo("#f06-query", { y: -60, opacity: 0 }, { y: 0, opacity: 1, duration: 0.5, ease: "back.out(1.6)" }, 2.75);
+      tl.fromTo("#f06-hint", { opacity: 0 }, { opacity: 1, duration: 0.4, ease: "power2.out" }, 3.2);
+      draw(paths[0], 3.4, 0.6);
+      tl.fromTo("#f06-lco", { opacity: 0 }, { opacity: 1, duration: 0.4, ease: "power2.out" }, 3.7);
+      tl.fromTo("#f06-hit", { scale: 0.5, opacity: 0, transformOrigin: "0% 50%" }, { scale: 1, opacity: 1, duration: 0.55, ease: "back.out(1.5)" }, 3.85);
+      draw(paths[1], 5.0, 0.4);
+      draw(paths[2], 5.15, 0.45);
+      draw(paths[3], 5.3, 0.5);
+      tl.fromTo(["#f06-a1", "#f06-a2", "#f06-a3"], { scale: 0.4, opacity: 0 }, { scale: 1, opacity: 1, duration: 0.45, ease: "back.out(1.7)", stagger: 0.15 }, 5.35);
+      tl.fromTo(["#f06-ac1", "#f06-ac2", "#f06-ac3"], { opacity: 0 }, { opacity: 1, duration: 0.35, stagger: 0.15 }, 5.6);
+      tl.fromTo("#f06-lcr", { y: 12, opacity: 0 }, { y: 0, opacity: 1, duration: 0.45, ease: "power3.out" }, 6.0);
+
+      window.__timelines["06-research-expression"] = tl;
+    })();
+  </script>
+</template>

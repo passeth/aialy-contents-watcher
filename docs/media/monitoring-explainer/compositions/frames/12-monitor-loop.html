@@ -1,0 +1,97 @@
+<template>
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.14.2/dist/gsap.min.js"></script>
+  <style>
+    @font-face { font-family: "Noto Sans KR"; src: url("assets/fonts/NotoSansKR-500.woff2") format("woff2"); font-weight: 500; font-display: block; }
+    @font-face { font-family: "Noto Sans KR"; src: url("assets/fonts/NotoSansKR-700.woff2") format("woff2"); font-weight: 700; font-display: block; }
+    @font-face { font-family: "Noto Sans KR"; src: url("assets/fonts/NotoSansKR-900.woff2") format("woff2"); font-weight: 900; font-display: block; }
+    /* shared chrome (identical in every step frame) */
+    .mx-topbar { position: absolute; left: 120px; right: 120px; top: 52px; height: 60px; }
+    .mx-step { position: absolute; left: 0; top: 0; height: 60px; padding: 0 28px; border-radius: 999px; background: #163300; color: #9fe870; font-weight: 700; font-size: 26px; line-height: 60px; white-space: nowrap; }
+    .mx-rail { position: absolute; left: 556px; top: 24px; width: 568px; height: 12px; display: flex; gap: 8px; }
+    .mx-seg { display: block; flex: none; width: 40px; height: 12px; border-radius: 6px; background: #e8ebe6; box-sizing: border-box; }
+    .mx-seg.mx-past { background: #163300; }
+    .mx-seg.mx-now { background: #9fe870; border: 2px solid #163300; }
+    .mx-example { position: absolute; right: 0; top: 0; height: 60px; padding: 0 26px; border-radius: 999px; background: #e8ebe6; color: #163300; font-weight: 700; font-size: 24px; line-height: 60px; white-space: nowrap; }
+    .mx-dot { display: inline-block; width: 14px; height: 14px; border-radius: 50%; background: #9fe870; border: 2px solid #163300; margin-right: 12px; vertical-align: middle; position: relative; top: -2px; box-sizing: border-box; }
+    .mx-h { position: absolute; left: 120px; top: 150px; font-weight: 900; font-size: 72px; line-height: 1.12; letter-spacing: -0.03em; color: #163300; white-space: nowrap; }
+
+    #root { position: absolute; inset: 0; overflow: hidden; font-family: "Noto Sans KR", sans-serif; color: #163300; }
+    .f12-bg { position: absolute; inset: 0; background: #ffffff; }
+    .f12-stage { position: absolute; inset: 0; }
+    .f12-svg { position: absolute; left: 0; top: 0; width: 1920px; height: 1080px; overflow: visible; }
+    .f12-pill { position: absolute; height: 68px; padding: 0 30px; border-radius: 999px; background: #e8ebe6; border: 4px solid #ffffff; font-weight: 900; font-size: 34px; line-height: 60px; white-space: nowrap; }
+    .f12-pill span { font-weight: 700; font-size: 22px; color: #4d5e45; margin-right: 10px; }
+    .f12-runner { position: absolute; left: 0; top: 0; width: 40px; height: 40px; border-radius: 50%; background: #9fe870; border: 6px solid #163300; box-sizing: border-box; offset-path: path("M 960 365 A 560 235 0 0 1 960 835 A 560 235 0 0 1 960 365"); offset-rotate: 0deg; offset-anchor: 50% 50%; offset-distance: 0%; }
+    .f12-center { position: absolute; left: 660px; top: 500px; width: 600px; text-align: center; }
+    .f12-c1, .f12-c2 { font-weight: 900; font-size: 78px; line-height: 1.12; letter-spacing: -0.035em; white-space: nowrap; }
+    .f12-c2 em { font-style: normal; position: relative; display: inline-block; }
+    .f12-c2 em i { position: absolute; left: -8px; right: -8px; bottom: 6px; height: 26px; border-radius: 8px; background: #9fe870; transform-origin: 0% 50%; }
+    .f12-c2 em b { position: relative; font-weight: 900; }
+    .f12-c3 { margin-top: 18px; font-weight: 500; font-size: 30px; color: #4d5e45; white-space: nowrap; }
+  </style>
+
+  <div data-hf-id="hf-wwmb" id="root" data-composition-id="12-monitor-loop" data-width="1920" data-height="1080" data-duration="7.6">
+    <div data-hf-id="hf-e0e7" id="f12-bg" class="clip f12-bg" data-start="0" data-duration="7.6" data-track-index="0"></div>
+    <div data-hf-id="hf-xzra" id="f12-stage" class="clip f12-stage" data-start="0" data-duration="7.6" data-track-index="1">
+      <div data-hf-id="hf-qfey" class="mx-topbar" data-layout-allow-overlap="">
+        <div data-hf-id="hf-dm55" class="mx-step">12 / 12 · 모니터링</div>
+        <div data-hf-id="hf-jjfs" class="mx-rail">
+          <i data-hf-id="hf-o4pb" class="mx-seg mx-past"></i><i data-hf-id="hf-e29b" class="mx-seg mx-past"></i><i data-hf-id="hf-dnya" class="mx-seg mx-past"></i><i data-hf-id="hf-d9n9" class="mx-seg mx-past"></i><i data-hf-id="hf-g1sg" class="mx-seg mx-past"></i><i data-hf-id="hf-fnhf" class="mx-seg mx-past"></i><i data-hf-id="hf-f96e" class="mx-seg mx-past"></i><i data-hf-id="hf-euvd" class="mx-seg mx-past"></i><i data-hf-id="hf-ba44" class="mx-seg mx-past"></i><i data-hf-id="hf-avt3" class="mx-seg mx-past"></i><i data-hf-id="hf-3bwt" class="mx-seg mx-past"></i><i data-hf-id="hf-8hh1" class="mx-seg mx-now"></i>
+        </div>
+        <div data-hf-id="hf-wsc5" class="mx-example"><i data-hf-id="hf-1zpd" class="mx-dot"></i>교육용 예시 · 실제 측정 아님</div>
+      </div>
+      <div data-hf-id="hf-8fz8" class="mx-h" id="f12-h" data-layout-allow-overlap="">계속 지켜보고, 다시 묻는다</div>
+
+      <svg data-hf-id="hf-wt3b" class="f12-svg" viewBox="0 0 1920 1080" fill="none">
+        <path data-hf-id="hf-42be" id="f12-ring" d="M 960 365 A 560 235 0 0 1 960 835 A 560 235 0 0 1 960 365" stroke="#163300" stroke-width="5" stroke-linecap="round" />
+      </svg>
+
+      <div data-hf-id="hf-fx7m" class="f12-runner" id="f12-runner"></div>
+      <div data-hf-id="hf-fagr" class="f12-pill" id="f12-p0" style="left: 960px; top: 365px"><span data-hf-id="hf-p81i">01</span>질문</div>
+      <div data-hf-id="hf-9ikk" class="f12-pill" id="f12-p1" style="left: 1356px; top: 434px"><span data-hf-id="hf-pmcj">02</span>검색</div>
+      <div data-hf-id="hf-fug4" class="f12-pill" id="f12-p2" style="left: 1520px; top: 600px"><span data-hf-id="hf-q0nk">03</span>관찰</div>
+      <div data-hf-id="hf-61wb" class="f12-pill" id="f12-p3" style="left: 1356px; top: 766px"><span data-hf-id="hf-n8id">04</span>발견</div>
+      <div data-hf-id="hf-zl5o" class="f12-pill" id="f12-p4" style="left: 960px; top: 835px"><span data-hf-id="hf-nmte">05</span>검증</div>
+      <div data-hf-id="hf-8c6y" class="f12-pill" id="f12-p5" style="left: 564px; top: 766px"><span data-hf-id="hf-o14f">06</span>저장</div>
+      <div data-hf-id="hf-4yew" class="f12-pill" id="f12-p6" style="left: 400px; top: 600px"><span data-hf-id="hf-offg">07</span>가설</div>
+      <div data-hf-id="hf-bhd1" class="f12-pill" id="f12-p7" style="left: 564px; top: 434px"><span data-hf-id="hf-lna9">08</span>실험</div>
+
+      <div data-hf-id="hf-rvc6" class="f12-center" id="f12-center">
+        <div data-hf-id="hf-b6nz" class="f12-c1" id="f12-c1">모니터링은</div>
+        <div data-hf-id="hf-u5ri" class="f12-c2" id="f12-c2"><em data-hf-id="hf-2lav"><i data-hf-id="hf-hdud" id="f12-mk"></i><b data-hf-id="hf-l4c6">반복</b></em>이다</div>
+        <div data-hf-id="hf-8n86" class="f12-c3" id="f12-c3">실험 결과가 다음 질문이 된다</div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    (function () {
+      const tl = gsap.timeline({ paused: true });
+      const center = { xPercent: -50, yPercent: -50 };
+      const ring = document.querySelector("#f12-ring");
+      const len = ring.getTotalLength();
+      ring.style.strokeDasharray = len;
+      const pills = [0, 1, 2, 3, 4, 5, 6, 7].map((k) => "#f12-p" + k);
+
+      tl.fromTo("#f12-h", { y: 24, opacity: 0 }, { y: 0, opacity: 1, duration: 0.5, ease: "power3.out" }, 0.1);
+      tl.fromTo(ring, { strokeDashoffset: len }, { strokeDashoffset: 0, duration: 2.2, ease: "power1.inOut" }, 0.9);
+      pills.forEach((p, k) => {
+        tl.fromTo(p, { ...center, scale: 0.5, opacity: 0 }, { ...center, scale: 1, opacity: 1, duration: 0.4, ease: "back.out(1.7)" }, 1.0 + k * 0.26);
+      });
+
+      // one lap: the runner travels the ring and lights each step as it passes
+      const lapStart = 3.3, lap = 2.4;
+      tl.fromTo("#f12-runner", { opacity: 0, scale: 0.4 }, { opacity: 1, scale: 1, duration: 0.3, ease: "back.out(2)" }, lapStart - 0.25);
+      tl.fromTo("#f12-runner", { offsetDistance: "0%" }, { offsetDistance: "100%", duration: lap, ease: "none", immediateRender: false }, lapStart);
+      pills.forEach((p, k) => {
+        tl.fromTo(p, { backgroundColor: "#e8ebe6" }, { backgroundColor: "#9fe870", duration: 0.2, ease: "power2.out" }, lapStart + (k / 8) * lap);
+      });
+
+      tl.fromTo(["#f12-c1", "#f12-c2"], { y: 30, opacity: 0 }, { y: 0, opacity: 1, duration: 0.55, ease: "power3.out", stagger: 0.18 }, 5.2);
+      tl.fromTo("#f12-mk", { scaleX: 0 }, { scaleX: 1, duration: 0.5, ease: "power3.inOut" }, 5.75);
+      tl.fromTo("#f12-c3", { opacity: 0 }, { opacity: 1, duration: 0.45, ease: "power2.out" }, 6.0);
+
+      window.__timelines["12-monitor-loop"] = tl;
+    })();
+  </script>
+</template>

@@ -1,0 +1,76 @@
+<template>
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.14.2/dist/gsap.min.js"></script>
+  <style>
+    @font-face { font-family: "Noto Sans KR"; src: url("assets/fonts/NotoSansKR-500.woff2") format("woff2"); font-weight: 500; font-display: block; }
+    @font-face { font-family: "Noto Sans KR"; src: url("assets/fonts/NotoSansKR-700.woff2") format("woff2"); font-weight: 700; font-display: block; }
+    @font-face { font-family: "Noto Sans KR"; src: url("assets/fonts/NotoSansKR-900.woff2") format("woff2"); font-weight: 900; font-display: block; }
+    /* shared chrome — dark (forest ground) variant */
+    .mx-topbar { position: absolute; left: 120px; right: 120px; top: 52px; height: 60px; }
+    .mx-step { position: absolute; left: 0; top: 0; height: 60px; padding: 0 28px; border-radius: 999px; background: #9fe870; color: #163300; font-weight: 700; font-size: 26px; line-height: 60px; white-space: nowrap; }
+    .mx-rail { position: absolute; left: 556px; top: 24px; width: 568px; height: 12px; display: flex; gap: 8px; }
+    .mx-seg { display: block; flex: none; width: 40px; height: 12px; border-radius: 6px; background: #2f4a1f; box-sizing: border-box; }
+    .mx-seg.mx-past { background: #e8ebe6; }
+    .mx-seg.mx-now { background: #9fe870; }
+    .mx-example { position: absolute; right: 0; top: 0; height: 60px; padding: 0 26px; border-radius: 999px; background: #24410f; color: #e8ebe6; font-weight: 700; font-size: 24px; line-height: 60px; white-space: nowrap; }
+    .mx-dot { display: inline-block; width: 14px; height: 14px; border-radius: 50%; background: #9fe870; margin-right: 12px; vertical-align: middle; position: relative; top: -2px; }
+    .mx-h { position: absolute; left: 120px; top: 150px; font-weight: 900; font-size: 72px; line-height: 1.12; letter-spacing: -0.03em; color: #ffffff; white-space: nowrap; }
+
+    #root { position: absolute; inset: 0; overflow: hidden; font-family: "Noto Sans KR", sans-serif; color: #ffffff; }
+    .f10-bg { position: absolute; inset: 0; background: #163300; }
+    .f10-stage { position: absolute; inset: 0; }
+    .f10-card { position: absolute; top: 300px; width: 820px; height: 466px; border-radius: 28px; background: #24410f; }
+    .f10-k1 { left: 120px; }
+    .f10-k2 { left: 980px; }
+    .f10-lab { position: absolute; left: 48px; top: 48px; height: 56px; padding: 0 24px; border-radius: 999px; background: #9fe870; color: #163300; font-weight: 900; font-size: 28px; line-height: 56px; white-space: nowrap; }
+    .f10-txt { position: absolute; left: 48px; top: 146px; font-weight: 900; font-size: 52px; line-height: 1.32; letter-spacing: -0.03em; color: #ffffff; }
+    .f10-txt div { white-space: nowrap; }
+    .f10-txt em { font-style: normal; color: #9fe870; }
+    .f10-src { position: absolute; left: 48px; bottom: 44px; font-weight: 500; font-size: 26px; color: #e8ebe6; white-space: nowrap; }
+    .f10-src b { font-weight: 700; color: #9fe870; }
+    .f10-note { position: absolute; left: 960px; top: 798px; height: 80px; padding: 0 40px; border-radius: 999px; background: #9fe870; color: #163300; font-weight: 900; font-size: 36px; line-height: 80px; letter-spacing: -0.02em; white-space: nowrap; }
+  </style>
+
+  <div data-hf-id="hf-pxjw" id="root" data-composition-id="10-hypothesis" data-width="1920" data-height="1080" data-duration="7.6">
+    <div data-hf-id="hf-jc8n" id="f10-bg" class="clip f10-bg" data-start="0" data-duration="7.6" data-track-index="0"></div>
+    <div data-hf-id="hf-foam" id="f10-stage" class="clip f10-stage" data-start="0" data-duration="7.6" data-track-index="1">
+      <div data-hf-id="hf-qfey" class="mx-topbar" data-layout-allow-overlap="">
+        <div data-hf-id="hf-2pfk" class="mx-step">10 / 12 · 가설</div>
+        <div data-hf-id="hf-jjfs" class="mx-rail">
+          <i data-hf-id="hf-o4pb" class="mx-seg mx-past"></i><i data-hf-id="hf-e29b" class="mx-seg mx-past"></i><i data-hf-id="hf-dnya" class="mx-seg mx-past"></i><i data-hf-id="hf-d9n9" class="mx-seg mx-past"></i><i data-hf-id="hf-g1sg" class="mx-seg mx-past"></i><i data-hf-id="hf-fnhf" class="mx-seg mx-past"></i><i data-hf-id="hf-f96e" class="mx-seg mx-past"></i><i data-hf-id="hf-euvd" class="mx-seg mx-past"></i><i data-hf-id="hf-ba44" class="mx-seg mx-past"></i><i data-hf-id="hf-8hh1" class="mx-seg mx-now"></i><i data-hf-id="hf-pv73" class="mx-seg"></i><i data-hf-id="hf-5vm7" class="mx-seg"></i>
+        </div>
+        <div data-hf-id="hf-wsc5" class="mx-example"><i data-hf-id="hf-1zpd" class="mx-dot"></i>교육용 예시 · 실제 측정 아님</div>
+      </div>
+      <div data-hf-id="hf-2gay" class="mx-h" id="f10-h" data-layout-allow-overlap="">관찰을 가설로 바꾼다</div>
+
+      <div data-hf-id="hf-ioca" class="f10-card f10-k1" id="f10-k1">
+        <div data-hf-id="hf-1gk1" class="f10-lab">제품 가설</div>
+        <div data-hf-id="hf-8wje" class="f10-txt"><div data-hf-id="hf-iiis">수부지를 위한</div><div data-hf-id="hf-yeow"><em data-hf-id="hf-d77l">가볍지만 탄력 있는</em></div><div data-hf-id="hf-0z1b">수분 제형</div></div>
+        <div data-hf-id="hf-8i5m" class="f10-src">근거 · <b data-hf-id="hf-ty38">북마크한 원문</b> (예시)</div>
+      </div>
+      <div data-hf-id="hf-eznm" class="f10-card f10-k2" id="f10-k2">
+        <div data-hf-id="hf-jwpb" class="f10-lab">메시지 가설</div>
+        <div data-hf-id="hf-8b4u" class="f10-txt"><div data-hf-id="hf-y7yw"><em data-hf-id="hf-mrww">“끈적임 없이 탄력탱탱”</em></div><div data-hf-id="hf-3ihn">이 말이 수부지 고객에게</div><div data-hf-id="hf-o6j8">통할까?</div></div>
+        <div data-hf-id="hf-k23y" class="f10-src">근거 · <b data-hf-id="hf-7rrx">함께 쓰인 표현</b> (예시)</div>
+      </div>
+
+      <div data-hf-id="hf-fwqi" class="f10-note" id="f10-note">가설은 결론이 아니라, 검증할 문장이다</div>
+    </div>
+  </div>
+
+  <script>
+    (function () {
+      const tl = gsap.timeline({ paused: true });
+      const center = { xPercent: -50 };
+      tl.fromTo("#f10-h", { y: 24, opacity: 0 }, { y: 0, opacity: 1, duration: 0.5, ease: "power3.out" }, 0.1);
+      tl.fromTo("#f10-k1", { y: 60, opacity: 0 }, { y: 0, opacity: 1, duration: 0.6, ease: "power3.out" }, 1.0);
+      tl.fromTo("#f10-k1 .f10-txt div", { y: 20, opacity: 0 }, { y: 0, opacity: 1, duration: 0.4, ease: "power3.out", stagger: 0.18 }, 1.35);
+      tl.fromTo("#f10-k1 .f10-src", { opacity: 0 }, { opacity: 1, duration: 0.4 }, 2.3);
+      tl.fromTo("#f10-k2", { y: 60, opacity: 0 }, { y: 0, opacity: 1, duration: 0.6, ease: "power3.out" }, 3.1);
+      tl.fromTo("#f10-k2 .f10-txt div", { y: 20, opacity: 0 }, { y: 0, opacity: 1, duration: 0.4, ease: "power3.out", stagger: 0.18 }, 3.45);
+      tl.fromTo("#f10-k2 .f10-src", { opacity: 0 }, { opacity: 1, duration: 0.4 }, 4.4);
+      tl.fromTo("#f10-note", { ...center, y: 20, opacity: 0 }, { ...center, y: 0, opacity: 1, duration: 0.55, ease: "power3.out" }, 5.1);
+
+      window.__timelines["10-hypothesis"] = tl;
+    })();
+  </script>
+</template>

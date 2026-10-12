@@ -1,0 +1,81 @@
+<template>
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.14.2/dist/gsap.min.js"></script>
+  <style>
+    @font-face { font-family: "Noto Sans KR"; src: url("assets/fonts/NotoSansKR-500.woff2") format("woff2"); font-weight: 500; font-display: block; }
+    @font-face { font-family: "Noto Sans KR"; src: url("assets/fonts/NotoSansKR-700.woff2") format("woff2"); font-weight: 700; font-display: block; }
+    @font-face { font-family: "Noto Sans KR"; src: url("assets/fonts/NotoSansKR-900.woff2") format("woff2"); font-weight: 900; font-display: block; }
+    /* shared chrome — dark (forest ground) variant */
+    .mx-topbar { position: absolute; left: 120px; right: 120px; top: 52px; height: 60px; }
+    .mx-step { position: absolute; left: 0; top: 0; height: 60px; padding: 0 28px; border-radius: 999px; background: #9fe870; color: #163300; font-weight: 700; font-size: 26px; line-height: 60px; white-space: nowrap; }
+    .mx-rail { position: absolute; left: 556px; top: 24px; width: 568px; height: 12px; display: flex; gap: 8px; }
+    .mx-seg { display: block; flex: none; width: 40px; height: 12px; border-radius: 6px; background: #2f4a1f; box-sizing: border-box; }
+    .mx-seg.mx-past { background: #e8ebe6; }
+    .mx-example { position: absolute; right: 0; top: 0; height: 60px; padding: 0 26px; border-radius: 999px; background: #24410f; color: #e8ebe6; font-weight: 700; font-size: 24px; line-height: 60px; white-space: nowrap; }
+    .mx-dot { display: inline-block; width: 14px; height: 14px; border-radius: 50%; background: #9fe870; margin-right: 12px; vertical-align: middle; position: relative; top: -2px; }
+    .mx-h { position: absolute; left: 120px; top: 150px; font-weight: 900; font-size: 72px; line-height: 1.12; letter-spacing: -0.03em; color: #ffffff; white-space: nowrap; }
+
+    #root { position: absolute; inset: 0; overflow: hidden; font-family: "Noto Sans KR", sans-serif; color: #ffffff; }
+    .f13-bg { position: absolute; inset: 0; background: #163300; }
+    .f13-stage { position: absolute; inset: 0; }
+    .f13-col { position: absolute; top: 300px; width: 820px; height: 440px; border-radius: 28px; box-sizing: border-box; }
+    .f13-now { left: 120px; background: #24410f; }
+    .f13-later { left: 980px; border: 4px dashed #6f8a5f; }
+    .f13-lab { position: absolute; left: 48px; top: 44px; height: 58px; padding: 0 26px; border-radius: 999px; font-weight: 900; font-size: 30px; line-height: 58px; white-space: nowrap; }
+    .f13-now .f13-lab { background: #9fe870; color: #163300; }
+    .f13-later .f13-lab { background: transparent; color: #e8ebe6; border: 3px solid #e8ebe6; line-height: 52px; box-sizing: border-box; }
+    .f13-row { position: absolute; left: 48px; width: 720px; display: flex; align-items: flex-start; gap: 20px; }
+    .f13-row i { flex: none; display: block; width: 46px; height: 46px; border-radius: 50%; margin-top: 2px; position: relative; box-sizing: border-box; }
+    .f13-now .f13-row i { background: #9fe870; }
+    .f13-now .f13-row i::after { content: ""; position: absolute; left: 16px; top: 9px; width: 11px; height: 20px; border-right: 5px solid #163300; border-bottom: 5px solid #163300; transform: rotate(45deg); }
+    .f13-later .f13-row i { border: 4px solid #e8ebe6; }
+    .f13-row div { font-weight: 700; font-size: 34px; line-height: 1.36; letter-spacing: -0.01em; }
+    .f13-row div span { display: block; white-space: nowrap; }
+    .f13-now .f13-row div { color: #ffffff; }
+    .f13-later .f13-row div { color: #e8ebe6; }
+    .f13-row small { display: block; font-weight: 500; font-size: 26px; color: #b9c6b1; margin-top: 4px; white-space: nowrap; }
+    .f13-foot { position: absolute; left: 120px; top: 788px; width: 1680px; height: 84px; border-radius: 999px; background: #24410f; display: flex; align-items: center; gap: 18px; padding-left: 34px; box-sizing: border-box; font-weight: 500; font-size: 30px; color: #e8ebe6; white-space: nowrap; }
+    .f13-foot b { font-weight: 900; color: #9fe870; }
+    .f13-foot i { flex: none; display: block; width: 40px; height: 40px; border-radius: 50%; background: #9fe870; color: #163300; font-style: normal; font-weight: 900; font-size: 26px; line-height: 40px; text-align: center; }
+  </style>
+
+  <div data-hf-id="hf-ojdy" id="root" data-composition-id="13-scope" data-width="1920" data-height="1080">
+    <div data-hf-id="hf-s6b8" id="f13-bg" class="clip f13-bg" data-start="0" data-duration="8" data-track-index="0"></div>
+    <div data-hf-id="hf-zeoh" id="f13-stage" class="clip f13-stage" data-start="0" data-duration="8" data-track-index="1">
+      <div data-hf-id="hf-qfey" class="mx-topbar" data-layout-allow-overlap="">
+        <div data-hf-id="hf-th0n" class="mx-step">정리 · 지금 할 수 있는 것</div>
+        <div data-hf-id="hf-jjfs" class="mx-rail">
+          <i data-hf-id="hf-o4pb" class="mx-seg mx-past"></i><i data-hf-id="hf-e29b" class="mx-seg mx-past"></i><i data-hf-id="hf-dnya" class="mx-seg mx-past"></i><i data-hf-id="hf-d9n9" class="mx-seg mx-past"></i><i data-hf-id="hf-g1sg" class="mx-seg mx-past"></i><i data-hf-id="hf-fnhf" class="mx-seg mx-past"></i><i data-hf-id="hf-f96e" class="mx-seg mx-past"></i><i data-hf-id="hf-euvd" class="mx-seg mx-past"></i><i data-hf-id="hf-ba44" class="mx-seg mx-past"></i><i data-hf-id="hf-avt3" class="mx-seg mx-past"></i><i data-hf-id="hf-3bwt" class="mx-seg mx-past"></i><i data-hf-id="hf-3q7u" class="mx-seg mx-past"></i>
+        </div>
+        <div data-hf-id="hf-wsc5" class="mx-example"><i data-hf-id="hf-1zpd" class="mx-dot"></i>교육용 예시 · 실제 측정 아님</div>
+      </div>
+      <div data-hf-id="hf-e7tq" class="mx-h" id="f13-h" data-layout-allow-overlap="">방법은 지금부터 연습할 수 있어요</div>
+
+      <div data-hf-id="hf-rgtl" class="f13-col f13-now" id="f13-now">
+        <div data-hf-id="hf-b8cv" class="f13-lab">지금 앱에서</div>
+        <div data-hf-id="hf-qxgl" class="f13-row" id="f13-n1" style="top: 140px"><i data-hf-id="hf-wt6k"></i><div data-hf-id="hf-yeow"><span data-hf-id="hf-xs5t">등록한 프로페셔널 Instagram</span><span data-hf-id="hf-gbr5">계정의 글을 읽어 온다</span></div></div>
+        <div data-hf-id="hf-dohc" class="f13-row" id="f13-n2" style="top: 254px"><i data-hf-id="hf-zeb8"></i><div data-hf-id="hf-y7yw"><span data-hf-id="hf-4c0u">수집한 글 안에서 키워드·브랜드·</span><span data-hf-id="hf-4f6h">작성자를 탐색하고 북마크한다</span></div></div>
+      </div>
+      <div data-hf-id="hf-irdx" class="f13-col f13-later" id="f13-later">
+        <div data-hf-id="hf-db29" class="f13-lab">아직 연결 전</div>
+        <div data-hf-id="hf-6kwf" class="f13-row" id="f13-l1" style="top: 140px"><i data-hf-id="hf-y7e5"></i><div data-hf-id="hf-x11t"><span data-hf-id="hf-nely">전역 키워드 발견</span><small data-hf-id="hf-xzag">등록하지 않은 계정까지 넓게 찾기</small></div></div>
+        <div data-hf-id="hf-gu02" class="f13-row" id="f13-l2" style="top: 254px"><i data-hf-id="hf-ylp6"></i><div data-hf-id="hf-xfcu"><span data-hf-id="hf-oek7">Meta 광고 자동 수집</span><small data-hf-id="hf-qfnc">지금은 광고 원문을 직접 저장</small></div></div>
+      </div>
+
+      <div data-hf-id="hf-7vra" class="f13-foot" id="f13-foot"><i data-hf-id="hf-2r6v">!</i><span data-hf-id="hf-3eko">영상 속 키워드·브랜드 연결은 모두 <b data-hf-id="hf-1bgv">교육용 예시</b>이며, 실제 측정 결과가 아닙니다.</span></div>
+    </div>
+  </div>
+
+  <script>
+    (function () {
+      const tl = gsap.timeline({ paused: true });
+      tl.fromTo("#f13-h", { y: 24, opacity: 0 }, { y: 0, opacity: 1, duration: 0.55, ease: "power3.out" }, 0.15);
+      tl.fromTo("#f13-now", { y: 50, opacity: 0 }, { y: 0, opacity: 1, duration: 0.6, ease: "power3.out" }, 1.0);
+      tl.fromTo(["#f13-n1", "#f13-n2"], { x: -20, opacity: 0 }, { x: 0, opacity: 1, duration: 0.45, ease: "power3.out", stagger: 0.55 }, 1.4);
+      tl.fromTo("#f13-later", { y: 50, opacity: 0 }, { y: 0, opacity: 1, duration: 0.6, ease: "power3.out" }, 3.4);
+      tl.fromTo(["#f13-l1", "#f13-l2"], { x: -20, opacity: 0 }, { x: 0, opacity: 1, duration: 0.45, ease: "power3.out", stagger: 0.55 }, 3.8);
+      tl.fromTo("#f13-foot", { y: 20, opacity: 0 }, { y: 0, opacity: 1, duration: 0.55, ease: "power3.out" }, 5.4);
+
+      window.__timelines["13-scope"] = tl;
+    })();
+  </script>
+</template>
