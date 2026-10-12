@@ -1143,7 +1143,7 @@ function BrandDictionary({
               name="brandName"
               required
               maxLength={80}
-              placeholder="라운드랩"
+              placeholder="비교 브랜드 A"
             />
           </label>
           <label>
@@ -1152,7 +1152,7 @@ function BrandDictionary({
               name="aliases"
               required
               maxLength={2000}
-              placeholder="라운드랩, 라운드 랩, roundlab, round lab"
+              placeholder="비교 브랜드 A, 비교브랜드A, reference a"
             />
           </label>
         </div>

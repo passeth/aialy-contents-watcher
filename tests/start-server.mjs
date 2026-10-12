@@ -3,7 +3,7 @@ import { tmpdir } from "node:os";
 import { join } from "node:path";
 import { createStore } from "../server/store.mjs";
 import { normalizeMedia } from "../server/instagram.mjs";
-process.env.DATA_DIR = mkdtempSync(join(tmpdir(), "catchmoment-browser-"));
+process.env.DATA_DIR = mkdtempSync(join(tmpdir(), "aialy-browser-"));
 process.env.PORT = "14317";
 process.env.NODE_ENV = "production";
 const store = createStore(join(process.env.DATA_DIR, "instagram.sqlite"));
@@ -31,7 +31,7 @@ for (let a = 0; a < 3; a++) {
     const data = {
       id: String(100 + n),
       caption: [
-        `수분 세럼으로 시작하는 아침 루틴 ${n} 수분크림 ${a === 1 ? "라운드랩 수부지" : "다른브랜드"}`,
+        `수분 세럼으로 시작하는 아침 루틴 ${n} 수분크림 ${a === 1 ? "비교 브랜드 A 수부지" : "다른브랜드"}`,
         `가을 메이크업, 부드러운 톤의 발견 ${n} ${a === 1 ? "수부지 탄력탱탱 장벽케어" : ""}`,
         `일상 속 새로운 뷰티 인사이트 ${n}`,
         `꾸준한 스킨케어의 기록 ${n}`,

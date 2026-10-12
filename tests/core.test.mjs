@@ -23,7 +23,7 @@ const config = {
   version: "v26.0",
 };
 function fixture(t) {
-  const dir = mkdtempSync(join(tmpdir(), "catchmoment-test-"));
+  const dir = mkdtempSync(join(tmpdir(), "aialy-test-"));
   const store = createStore(join(dir, "test.sqlite"));
   const secrets = credentials(join(dir, "connection.json"));
   const id = store.addSource({

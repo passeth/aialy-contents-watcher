@@ -59,62 +59,74 @@
     {
       "filename": "4b88e8ed599962b0.js",
       "sha256": "82736048d3e5b6d3e90b17e6402f0537fafeeaa8ea2a7d0cb09c2a656cf0efc1",
-      "url": "https://catchmoments.ai/_next/static/chunks/4b88e8ed599962b0.js"
+      "url": null,
+      "source_url_note": "Reference service URL omitted from public documentation; original capture remains local."
     },
     {
       "filename": "15fbc8ee943a6465.js",
       "sha256": "a710636b5eb06ff717c8efdecdfbc51cf56c1fde419bbd0afbd2f4f96a7a565e",
-      "url": "https://catchmoments.ai/_next/static/chunks/15fbc8ee943a6465.js"
+      "url": null,
+      "source_url_note": "Reference service URL omitted from public documentation; original capture remains local."
     },
     {
       "filename": "c83cc18336300f30.js",
       "sha256": "9e69ed3e62bcd6ced5d41737bc431b766f452da435172c7e046c8670a230d553",
-      "url": "https://catchmoments.ai/_next/static/chunks/c83cc18336300f30.js"
+      "url": null,
+      "source_url_note": "Reference service URL omitted from public documentation; original capture remains local."
     },
     {
       "filename": "7d9e0bd1cd5cee48.js",
       "sha256": "01fb3bcbfa01e0ed3d7fe0c78badb881c1dbcb5eab466ac475579c964dcec35a",
-      "url": "https://catchmoments.ai/_next/static/chunks/7d9e0bd1cd5cee48.js"
+      "url": null,
+      "source_url_note": "Reference service URL omitted from public documentation; original capture remains local."
     },
     {
       "filename": "28e5ffcc1b647aba.js",
       "sha256": "61caab5d6fc391c9a53b13edc425bb32c601575c73c22bea108a646d442a12b7",
-      "url": "https://catchmoments.ai/_next/static/chunks/28e5ffcc1b647aba.js"
+      "url": null,
+      "source_url_note": "Reference service URL omitted from public documentation; original capture remains local."
     },
     {
       "filename": "17ebbef24b05879b.js",
       "sha256": "8c636cd34e77d72d6d2b3c349ee79a0588c1da04387dd8ec87a4ecfb8151c46b",
-      "url": "https://catchmoments.ai/_next/static/chunks/17ebbef24b05879b.js"
+      "url": null,
+      "source_url_note": "Reference service URL omitted from public documentation; original capture remains local."
     },
     {
       "filename": "59a0c062482e3b51.js",
       "sha256": "13f761b33029bb127f262983936022b617f3167ee67c76569bfa2b943b75d100",
-      "url": "https://catchmoments.ai/_next/static/chunks/59a0c062482e3b51.js"
+      "url": null,
+      "source_url_note": "Reference service URL omitted from public documentation; original capture remains local."
     },
     {
       "filename": "06bcdea56e7bb864.js",
       "sha256": "0dfafa04ecb338ec871d0bc3d9758581044b1e1cfacc8e312098cc75f4e2b532",
-      "url": "https://catchmoments.ai/_next/static/chunks/06bcdea56e7bb864.js"
+      "url": null,
+      "source_url_note": "Reference service URL omitted from public documentation; original capture remains local."
     },
     {
       "filename": "2071dabdc0fe368b.js",
       "sha256": "f11d914c65b9693dab9a08685ac8d62e16fa58476d7d69febded62d47391ec9e",
-      "url": "https://catchmoments.ai/_next/static/chunks/2071dabdc0fe368b.js"
+      "url": null,
+      "source_url_note": "Reference service URL omitted from public documentation; original capture remains local."
     },
     {
       "filename": "abcf4a73eeb7a0d1.js",
       "sha256": "5ad50fbac5423644f058100cadab865c09f603a38fa8dd9d63968fb7ba2d62c2",
-      "url": "https://catchmoments.ai/_next/static/chunks/abcf4a73eeb7a0d1.js"
+      "url": null,
+      "source_url_note": "Reference service URL omitted from public documentation; original capture remains local."
     },
     {
       "filename": "2b47d45e8ded889c.js",
       "sha256": "d5de50fdab4d1581e1269a238e72f4c783dc6b736729f2d22ab8a722dd45e2ce",
-      "url": "https://catchmoments.ai/_next/static/chunks/2b47d45e8ded889c.js"
+      "url": null,
+      "source_url_note": "Reference service URL omitted from public documentation; original capture remains local."
     },
     {
       "filename": "a42d6d5e2f88450c.js",
       "sha256": "8a5c76c2d4fcea4dc1402d60a248489764c2b96cb18ac340e6f1ce8a2dcc46fd",
-      "url": "https://catchmoments.ai/_next/static/chunks/a42d6d5e2f88450c.js"
+      "url": null,
+      "source_url_note": "Reference service URL omitted from public documentation; original capture remains local."
     }
   ]
 }

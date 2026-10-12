@@ -93,27 +93,27 @@ test("brand dictionary associations require text and disclose filters never labe
   assert.equal("paid" in result.items[1], false);
 });
 
-test("independent dictionary supports moisturizer to RoundLab to 수부지 exploration while retaining the broad query", () => {
+test("independent dictionary supports moisturizer to ReferenceA to 수부지 exploration while retaining the broad query", () => {
   const dictionary = [
-    { id: "roundlab", name: "라운드랩", aliases: ["라운드랩", "roundlab", "round lab"] },
+    { id: "referencea", name: "비교 브랜드 A", aliases: ["비교 브랜드 A", "referencea", "reference a"] },
     { id: "fraijour", name: "프레쥬", aliases: ["fraijour", "프레쥬"] },
   ];
   const content = [
-    item("round-moisture", { caption: "라운드랩 보습 #수부지 #수부지", author: "roundlab" }),
-    item("round-review", { caption: "ROUND LAB 보습 추천 #수부지", author: "reviewer" }),
+    item("round-moisture", { caption: "비교 브랜드 A 보습 #수부지 #수부지", author: "referencea" }),
+    item("round-review", { caption: "REFERENCE A 보습 추천 #수부지", author: "reviewer" }),
     item("fraijour-moisture", { caption: "Fraijour 보습 #장벽", author: "fraijour" }),
-    item("round-sun", { caption: "RoundLab 선크림 #수부지", author: "creator" }),
+    item("round-sun", { caption: "ReferenceA 선크림 #수부지", author: "creator" }),
     item("other-sun", { caption: "선크림 #수부지", author: "other" }),
   ];
-  const sources = [source("r", "brand", "roundlab"), source("f", "owned", "fraijour")];
+  const sources = [source("r", "brand", "referencea"), source("f", "owned", "fraijour")];
   const broad = analyzeMonitoring(content, sources, [], { q: "보습" }, NOW, dictionary);
-  assert.deepEqual(broad.brands, [{ id: "roundlab", name: "라운드랩", count: 2 }, { id: "fraijour", name: "프레쥬", count: 1 }]);
-  const roundlab = analyzeMonitoring(content, sources, [], { q: "보습", brandId: broad.brands[0].id }, NOW, dictionary);
-  assert.deepEqual(roundlab.items.map((row) => row.id), ["round-moisture", "round-review"]);
-  assert.deepEqual(roundlab.keywords.find((row) => row.term === "수부지"), { term: "수부지", count: 2, previous: 0, growth: null, authors: 2 });
+  assert.deepEqual(broad.brands, [{ id: "referencea", name: "비교 브랜드 A", count: 2 }, { id: "fraijour", name: "프레쥬", count: 1 }]);
+  const referencea = analyzeMonitoring(content, sources, [], { q: "보습", brandId: broad.brands[0].id }, NOW, dictionary);
+  assert.deepEqual(referencea.items.map((row) => row.id), ["round-moisture", "round-review"]);
+  assert.deepEqual(referencea.keywords.find((row) => row.term === "수부지"), { term: "수부지", count: 2, previous: 0, growth: null, authors: 2 });
   const newKeywordSearch = analyzeMonitoring(content, sources, [], { q: "수부지" }, NOW, dictionary);
   assert.equal(newKeywordSearch.summary.mentions, 4);
-  assert.deepEqual(newKeywordSearch.brands, [{ id: "roundlab", name: "라운드랩", count: 3 }]);
+  assert.deepEqual(newKeywordSearch.brands, [{ id: "referencea", name: "비교 브랜드 A", count: 3 }]);
   assert.equal(analyzeMonitoring(content, sources, [], { q: "보습", brandId: "missing" }, NOW, dictionary).summary.mentions, 0);
   assert.deepEqual(analyzeMonitoring(content, sources, [brand], { q: "보습" }, NOW).brands, []);
   assert.equal(sources[0].kind, "brand");
