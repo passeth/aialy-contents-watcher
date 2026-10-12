@@ -1,0 +1,32 @@
+{
+  "name": "catchmoment-workspace",
+  "private": true,
+  "version": "0.1.0",
+  "type": "module",
+  "engines": {
+    "node": ">=24.11"
+  },
+  "scripts": {
+    "dev": "node server/index.mjs",
+    "build": "tsc -b && vite build",
+    "start": "NODE_ENV=production node server/index.mjs",
+    "test": "node --test tests/*.test.mjs",
+    "test:e2e": "playwright test",
+    "check": "tsc -b"
+  },
+  "dependencies": {
+    "express": "^5.3.0",
+    "lucide-react": "^1.55.0",
+    "react": "^19.3.0",
+    "react-dom": "^19.3.0",
+    "zod": "^4.6.6"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.64.0",
+    "@types/react": "^19.3.0",
+    "@types/react-dom": "^19.3.0",
+    "typescript": "^7.0.2",
+    "vite": "^8.3.4"
+  },
+  "license": "MIT"
+}
