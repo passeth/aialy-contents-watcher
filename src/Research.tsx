@@ -363,7 +363,7 @@ export function Research({
           </div>
           {!sets.length && (
             <div className="seed-suggestion">
-              <strong>Fraijour 외부 언급부터 시작하세요</strong>
+              <strong>우리 브랜드 외부 언급부터 시작하세요</strong>
               <p>
                 영문·국문 브랜드명을 하나의 조건으로 묶고, 잘못 일치한 결과를
                 보며 제외어를 보완합니다.
@@ -373,13 +373,13 @@ export function Research({
                 onClick={() =>
                   setEditing({
                     ...draftRule(),
-                    name: "Fraijour 외부 언급",
+                    name: "우리 브랜드 외부 언급",
                     kind: "brand",
-                    keywords: ["fraijour", "프레쥬"],
+                    keywords: [],
                   })
                 }
               >
-                Fraijour 조건 작성
+                우리 브랜드 조건 작성
               </button>
             </div>
           )}
@@ -1022,7 +1022,7 @@ export function Research({
                 <textarea
                   name="keywords"
                   defaultValue={editing.keywords.join(", ")}
-                  placeholder="fraijour, 프레쥬"
+                  placeholder="국문 브랜드명, 영문 브랜드명"
                 />
               </label>
               <label>
@@ -1372,7 +1372,7 @@ function Ads() {
           className="text-btn"
           href={
             "https://www.facebook.com/ads/library/?active_status=all&ad_type=all&country=ALL&q=" +
-            encodeURIComponent(query || "fraijour")
+            encodeURIComponent(query)
           }
           target="_blank"
           rel="noreferrer"

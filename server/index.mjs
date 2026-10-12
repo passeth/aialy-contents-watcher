@@ -2,7 +2,7 @@ import { resolve } from "node:path";
 import { createWorkspaceApp } from "./workspaces.mjs";
 import express from "express";
 const dataDir = resolve(process.env.DATA_DIR || ".data");
-const workspaces = createWorkspaceApp(dataDir);
+const workspaces = createWorkspaceApp(dataDir, { defaultName: process.env.DEFAULT_WORKSPACE_NAME });
 const app = workspaces.app;
 if (process.env.NODE_ENV === "production") {
   app.use(express.static("dist"));
