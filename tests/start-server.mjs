@@ -5,6 +5,7 @@ import { createStore } from "../server/store.mjs";
 import { normalizeMedia } from "../server/instagram.mjs";
 process.env.DATA_DIR = mkdtempSync(join(tmpdir(), "aialy-browser-"));
 process.env.PORT = "14317";
+process.env.DEFAULT_WORKSPACE_NAME = "기본 공간";
 process.env.NODE_ENV = "production";
 const store = createStore(join(process.env.DATA_DIR, "instagram.sqlite"));
 for (let a = 0; a < 3; a++) {

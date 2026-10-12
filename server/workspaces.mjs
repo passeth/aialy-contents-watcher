@@ -17,7 +17,7 @@ export function createWorkspaceApp(dataDir, options = {}) {
     created_at TEXT NOT NULL
   )`);
   registry.prepare("INSERT OR IGNORE INTO workspaces VALUES (?,?,?)")
-    .run("default", "Fraijour", new Date().toISOString());
+    .run("default", options.defaultName?.trim().slice(0, 60) || "내 워크스페이스", new Date().toISOString());
   const list = () => registry.prepare("SELECT id,name,created_at AS createdAt FROM workspaces ORDER BY created_at,id").all();
   const contexts = new Map();
   let started = false;

@@ -274,12 +274,12 @@ test("category workspace creation, switching, tab isolation and refresh persiste
   await expect(page.getByRole("button", { name: /^두피 진정 아이디어/ })).toBeVisible();
   const other = await context.newPage();
   await other.goto("/");
-  await expect(other.locator(".workspace strong")).toHaveText("Fraijour");
+  await expect(other.locator(".workspace strong")).toHaveText("기본 공간");
   await expect(other.locator(".content-card")).toHaveCount(12);
   await expect(other.getByRole("button", { name: /^두피 진정 아이디어/ })).toHaveCount(0);
   await expect(page).toHaveURL(hairUrl);
   await page.getByLabel("워크스페이스 전환", { exact: true }).click();
-  await page.getByRole("button", { name: "Fraijour", exact: true }).click();
+  await page.getByRole("button", { name: "기본 공간", exact: true }).click();
   await expect(page.locator(".content-card")).toHaveCount(12);
   await other.close();
 });

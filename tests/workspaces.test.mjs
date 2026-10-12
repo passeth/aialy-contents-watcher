@@ -9,11 +9,11 @@ import { createStore } from '../server/store.mjs';
 test('workspaces preserve legacy data, isolate mutations and connections, and survive restart', async () => {
   const dir = mkdtempSync(join(tmpdir(), 'aialy-workspaces-'));
   const legacy = createStore(join(dir, 'instagram.sqlite'));
-  legacy.addSource({username:'fraijour_fixture',label:'Existing',kind:'owned',intervalHours:6});
+  legacy.addSource({username:'housebrand_fixture',label:'Existing',kind:'owned',intervalHours:6});
   legacy.db.close();
   let manager, server, base;
-  async function start() {
-    manager = createWorkspaceApp(dir);
+  async function start(defaultName) {
+    manager = createWorkspaceApp(dir, {defaultName});
     server = manager.app.listen(0, '127.0.0.1');
     await new Promise(resolve => server.once('listening', resolve));
     base = `http://127.0.0.1:${server.address().port}/api`;
@@ -25,7 +25,8 @@ test('workspaces preserve legacy data, isolate mutations and connections, and su
   }
   try {
     await start();
-    assert.equal((await request('/workspace')).data.sources[0].username, 'fraijour_fixture');
+    assert.equal((await request('/workspaces')).data[0].name, '내 워크스페이스');
+    assert.equal((await request('/workspace')).data.sources[0].username, 'housebrand_fixture');
     const skin = (await request('/workspaces',{method:'POST',body:{name:'스킨케어'}})).data;
     const hair = (await request('/workspaces',{method:'POST',body:{name:'헤어케어'}})).data;
     assert.equal((await request('/workspace',{id:skin.id})).data.content.length,0);
@@ -41,7 +42,8 @@ test('workspaces preserve legacy data, isolate mutations and connections, and su
     assert.equal((await request('/workspaces',{method:'POST',body:{name:'injected'},origin:'https://evil.example'})).status,403);
     assert.equal((await request('/workspaces',{method:'POST',body:{name:'   '}})).status,400);
     await stop();
-    await start();
+    await start("New config must not rename existing data");
+    assert.equal((await request('/workspaces')).data[0].name, '내 워크스페이스');
     assert.equal((await request('/workspaces')).data.length,3);
     assert.equal((await request('/workspace',{id:skin.id})).data.boards[0].name,'장벽 회복');
     assert.equal((await request('/workspace')).data.sources.length,1);
