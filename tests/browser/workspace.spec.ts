@@ -141,7 +141,7 @@ test("topic to brand to expression to creator exploration preserves evidence and
   const errors: string[] = [];
   page.on("pageerror", (e) => errors.push(e.message));
   const response = await request.post("/api/monitoring/brands", {
-    data: { name: "라운드랩", aliases: ["라운드랩", "round lab"] },
+    data: { name: "비교 브랜드 A", aliases: ["비교 브랜드 A", "reference a"] },
   });
   const brand = await response.json();
   await page.goto("/?page=social");
@@ -150,7 +150,7 @@ test("topic to brand to expression to creator exploration preserves evidence and
   await expect(page.locator(".metric-card").first()).toContainText("3");
   await page
     .locator(".brand-ranks")
-    .getByRole("button", { name: "라운드랩" })
+    .getByRole("button", { name: "비교 브랜드 A" })
     .click();
   await expect(page.getByLabel("분석 브랜드")).toHaveValue(brand.id);
   await expect(page.locator(".metric-card").first()).toContainText("1");
@@ -170,10 +170,10 @@ test("topic to brand to expression to creator exploration preserves evidence and
   await expect(page.locator(".analysis-table")).toContainText("탄력탱탱");
   await expect(
     page.getByRole("navigation", { name: "탐색 경로" }),
-  ).toContainText("라운드랩");
+  ).toContainText("비교 브랜드 A");
   await page
     .getByRole("navigation", { name: "탐색 경로" })
-    .getByRole("button", { name: "수분크림 · 라운드랩", exact: true })
+    .getByRole("button", { name: "수분크림 · 비교 브랜드 A", exact: true })
     .click();
   await expect(page.getByLabel("분석 브랜드")).toHaveValue(brand.id);
   await expect(page.getByLabel("분석 키워드")).toHaveValue("수분크림");
