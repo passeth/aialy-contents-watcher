@@ -1,0 +1,100 @@
+<template>
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.14.2/dist/gsap.min.js"></script>
+  <style>
+    @font-face { font-family: "Noto Sans KR"; src: url("assets/fonts/NotoSansKR-500.woff2") format("woff2"); font-weight: 500; font-display: block; }
+    @font-face { font-family: "Noto Sans KR"; src: url("assets/fonts/NotoSansKR-700.woff2") format("woff2"); font-weight: 700; font-display: block; }
+    @font-face { font-family: "Noto Sans KR"; src: url("assets/fonts/NotoSansKR-900.woff2") format("woff2"); font-weight: 900; font-display: block; }
+    /* shared chrome (identical in every step frame) */
+    .mx-topbar { position: absolute; left: 120px; right: 120px; top: 52px; height: 60px; }
+    .mx-step { position: absolute; left: 0; top: 0; height: 60px; padding: 0 28px; border-radius: 999px; background: #163300; color: #9fe870; font-weight: 700; font-size: 26px; line-height: 60px; white-space: nowrap; }
+    .mx-rail { position: absolute; left: 556px; top: 24px; width: 568px; height: 12px; display: flex; gap: 8px; }
+    .mx-seg { display: block; flex: none; width: 40px; height: 12px; border-radius: 6px; background: #e8ebe6; box-sizing: border-box; }
+    .mx-seg.mx-past { background: #163300; }
+    .mx-seg.mx-now { background: #9fe870; border: 2px solid #163300; }
+    .mx-example { position: absolute; right: 0; top: 0; height: 60px; padding: 0 26px; border-radius: 999px; background: #e8ebe6; color: #163300; font-weight: 700; font-size: 24px; line-height: 60px; white-space: nowrap; }
+    .mx-dot { display: inline-block; width: 14px; height: 14px; border-radius: 50%; background: #9fe870; border: 2px solid #163300; margin-right: 12px; vertical-align: middle; position: relative; top: -2px; box-sizing: border-box; }
+    .mx-h { position: absolute; left: 120px; top: 150px; font-weight: 900; font-size: 72px; line-height: 1.12; letter-spacing: -0.03em; color: #163300; white-space: nowrap; }
+    /* shared post-card row (frames 03 + 04 use identical geometry) */
+    .mx-cards { position: absolute; left: 120px; top: 500px; width: 1680px; height: 360px; }
+    .mx-card { position: absolute; top: 0; width: 260px; height: 360px; border-radius: 24px; background: #e8ebe6; }
+    .mx-img { position: absolute; left: 14px; right: 14px; top: 14px; height: 178px; border-radius: 16px; background: #d3dacd; }
+    .mx-img::after { content: ""; position: absolute; left: 70%; top: 62%; width: 58px; height: 58px; margin: -29px 0 0 -29px; border-radius: 50%; border: 5px solid #ffffff; box-sizing: border-box; }
+    .mx-ava { position: absolute; left: 18px; top: 212px; width: 40px; height: 40px; border-radius: 50%; background: #163300; }
+    .mx-bar { position: absolute; left: 70px; height: 14px; border-radius: 7px; background: #c2cbbc; }
+    .mx-b1 { top: 216px; width: 120px; }
+    .mx-b2 { top: 240px; width: 80px; background: #d3dacd; }
+    .mx-b3 { left: 18px; top: 284px; width: 210px; }
+    .mx-b4 { left: 18px; top: 312px; width: 160px; }
+
+    #root { position: absolute; inset: 0; overflow: hidden; font-family: "Noto Sans KR", sans-serif; color: #163300; }
+    .f04-bg { position: absolute; inset: 0; background: #ffffff; }
+    .f04-stage { position: absolute; inset: 0; }
+    .f04-brand { position: absolute; left: 28px; top: 28px; height: 50px; padding: 0 20px; border-radius: 999px; background: #ffffff; border: 3px solid #163300; box-sizing: border-box; font-weight: 700; font-size: 25px; line-height: 44px; white-space: nowrap; }
+    .f04-brand.f04-rl { background: #ffffff; }
+    .f04-lines { position: absolute; left: 0; top: 0; width: 1920px; height: 1080px; overflow: visible; }
+    .f04-big { position: absolute; left: 400px; top: 290px; height: 108px; padding: 0 30px 0 44px; border-radius: 999px; background: #9fe870; display: flex; align-items: center; gap: 22px; white-space: nowrap; }
+    .f04-big b { font-weight: 900; font-size: 60px; letter-spacing: -0.03em; }
+    .f04-big i { font-style: normal; height: 48px; padding: 0 18px; border-radius: 999px; background: #163300; color: #9fe870; font-weight: 700; font-size: 24px; line-height: 48px; }
+    .f04-q { position: absolute; left: 1080px; height: 76px; padding: 0 30px; border-radius: 999px; border: 3px solid #163300; box-sizing: border-box; display: flex; align-items: center; gap: 16px; font-weight: 700; font-size: 32px; white-space: nowrap; background: #ffffff; }
+    .f04-q span { display: inline-block; width: 44px; height: 44px; border-radius: 50%; background: #163300; color: #9fe870; font-weight: 900; font-size: 26px; line-height: 44px; text-align: center; }
+    .f04-q1 { top: 262px; }
+    .f04-q2 { top: 354px; }
+  </style>
+
+  <div data-hf-id="hf-78b3" id="root" data-composition-id="04-brands" data-width="1920" data-height="1080" data-duration="7">
+    <div data-hf-id="hf-mvpn" id="f04-bg" class="clip f04-bg" data-start="0" data-duration="7" data-track-index="0"></div>
+    <div data-hf-id="hf-m1u4" id="f04-stage" class="clip f04-stage" data-start="0" data-duration="7" data-track-index="1">
+      <div data-hf-id="hf-qfey" class="mx-topbar" data-layout-allow-overlap="">
+        <div data-hf-id="hf-y6ih" class="mx-step">04 / 12 · 브랜드 관찰</div>
+        <div data-hf-id="hf-jjfs" class="mx-rail">
+          <i data-hf-id="hf-o4pb" class="mx-seg mx-past"></i><i data-hf-id="hf-e29b" class="mx-seg mx-past"></i><i data-hf-id="hf-dnya" class="mx-seg mx-past"></i><i data-hf-id="hf-8hh1" class="mx-seg mx-now"></i><i data-hf-id="hf-pv73" class="mx-seg"></i><i data-hf-id="hf-5vm7" class="mx-seg"></i><i data-hf-id="hf-5hb6" class="mx-seg"></i><i data-hf-id="hf-5305" class="mx-seg"></i><i data-hf-id="hf-7v5c" class="mx-seg"></i><i data-hf-id="hf-7gub" class="mx-seg"></i><i data-hf-id="hf-72ja" class="mx-seg"></i><i data-hf-id="hf-6o89" class="mx-seg"></i>
+        </div>
+        <div data-hf-id="hf-wsc5" class="mx-example"><i data-hf-id="hf-1zpd" class="mx-dot"></i>교육용 예시 · 실제 측정 아님</div>
+      </div>
+      <div data-hf-id="hf-31g3" class="mx-h" id="f04-h" data-layout-allow-overlap="">어떤 브랜드가 보이는지 본다</div>
+
+      <div data-hf-id="hf-0cpp" class="mx-cards" id="f04-cards">
+        <div data-hf-id="hf-u38d" class="mx-card" style="left: 0px"><div data-hf-id="hf-wuqt" class="mx-img"><div data-hf-id="hf-43uu" class="f04-brand f04-rl" id="f04-b1">비교 브랜드 A</div></div><i data-hf-id="hf-ey2q" class="mx-ava"></i><i data-hf-id="hf-323k" class="mx-bar mx-b1"></i><i data-hf-id="hf-dxl7" class="mx-bar mx-b2"></i><i data-hf-id="hf-9zh6" class="mx-bar mx-b3"></i><i data-hf-id="hf-r7rh" class="mx-bar mx-b4"></i></div>
+        <div data-hf-id="hf-mf63" class="mx-card" style="left: 284px"><div data-hf-id="hf-sut5" class="mx-img"><div data-hf-id="hf-k3xy" class="f04-brand f04-other" id="f04-b2">브랜드 B</div></div><i data-hf-id="hf-rhba" class="mx-ava"></i><i data-hf-id="hf-jyhk" class="mx-bar mx-b1"></i><i data-hf-id="hf-7qnf" class="mx-bar mx-b2"></i><i data-hf-id="hf-ppmm" class="mx-bar mx-b3"></i><i data-hf-id="hf-4fgh" class="mx-bar mx-b4"></i></div>
+        <div data-hf-id="hf-s96q" class="mx-card" style="left: 568px"><div data-hf-id="hf-u1q8" class="mx-img"><div data-hf-id="hf-9pj2" class="f04-brand f04-other" id="f04-b3">브랜드 C</div></div><i data-hf-id="hf-rvmb" class="mx-ava"></i><i data-hf-id="hf-irkh" class="mx-bar mx-b1"></i><i data-hf-id="hf-7cce" class="mx-bar mx-b2"></i><i data-hf-id="hf-q3xn" class="mx-bar mx-b3"></i><i data-hf-id="hf-5mdk" class="mx-bar mx-b4"></i></div>
+        <div data-hf-id="hf-unqs" class="mx-card" style="left: 852px"><div data-hf-id="hf-tnf7" class="mx-img"><div data-hf-id="hf-qy4n" class="f04-brand f04-rl" id="f04-b4">비교 브랜드 A</div></div><i data-hf-id="hf-s9xc" class="mx-ava"></i><i data-hf-id="hf-j5vi" class="mx-bar mx-b1"></i><i data-hf-id="hf-6y1d" class="mx-bar mx-b2"></i><i data-hf-id="hf-qi8o" class="mx-bar mx-b3"></i><i data-hf-id="hf-582j" class="mx-bar mx-b4"></i></div>
+        <div data-hf-id="hf-a7n6" class="mx-card" style="left: 1136px"><div data-hf-id="hf-rnw2" class="mx-img"></div><i data-hf-id="hf-phs5" class="mx-ava"></i><i data-hf-id="hf-hyyf" class="mx-bar mx-b1"></i><i data-hf-id="hf-6jqc" class="mx-bar mx-b2"></i><i data-hf-id="hf-nq3h" class="mx-bar mx-b3"></i><i data-hf-id="hf-38je" class="mx-bar mx-b4"></i></div>
+        <div data-hf-id="hf-7wku" class="mx-card" style="left: 1420px"><div data-hf-id="hf-r9l1" class="mx-img"><div data-hf-id="hf-wujm" class="f04-brand f04-other" id="f04-b6">브랜드 B</div></div><i data-hf-id="hf-pw36" class="mx-ava"></i><i data-hf-id="hf-id9g" class="mx-bar mx-b1"></i><i data-hf-id="hf-65fb" class="mx-bar mx-b2"></i><i data-hf-id="hf-o4ei" class="mx-bar mx-b3"></i><i data-hf-id="hf-2u8d" class="mx-bar mx-b4"></i></div>
+      </div>
+
+      <svg data-hf-id="hf-4ztx" class="f04-lines" viewBox="0 0 1920 1080" fill="none" stroke="#163300" stroke-width="5" stroke-linecap="round">
+        <path data-hf-id="hf-vw6z" id="f04-l1" d="M 232 540 C 232 450, 470 470, 500 398" />
+        <path data-hf-id="hf-et9x" id="f04-l2" d="M 1084 540 C 1084 470, 760 480, 700 398" />
+      </svg>
+      <div data-hf-id="hf-de98" class="f04-big" id="f04-big"><b data-hf-id="hf-2dre">비교 브랜드 A</b><i data-hf-id="hf-4uio">예시</i></div>
+
+      <div data-hf-id="hf-tlcw" class="f04-q f04-q1" id="f04-q1"><span data-hf-id="hf-d0e2">?</span>브랜드가 직접 올린 글인가</div>
+      <div data-hf-id="hf-raxm" class="f04-q f04-q2" id="f04-q2"><span data-hf-id="hf-87oe">?</span>외부 계정이 언급한 글인가</div>
+    </div>
+  </div>
+
+  <script>
+    (function () {
+      const tl = gsap.timeline({ paused: true });
+      const lines = ["#f04-l1", "#f04-l2"].map((s) => document.querySelector(s));
+      lines.forEach((p) => {
+        const len = p.getTotalLength();
+        p.style.strokeDasharray = len;
+        p.dataset.len = len;
+      });
+
+      tl.fromTo("#f04-h", { y: 24, opacity: 0 }, { y: 0, opacity: 1, duration: 0.5, ease: "power3.out" }, 0.1);
+      tl.fromTo(["#f04-b1", "#f04-b2", "#f04-b3", "#f04-b4", "#f04-b6"], { scale: 0.6, opacity: 0, transformOrigin: "0% 50%" }, { scale: 1, opacity: 1, duration: 0.4, ease: "back.out(1.7)", stagger: 0.3 }, 1.0);
+      tl.fromTo(["#f04-b1", "#f04-b4"], { backgroundColor: "#ffffff" }, { backgroundColor: "#9fe870", duration: 0.35, ease: "power2.out", immediateRender: false }, 2.8);
+      tl.fromTo(["#f04-b2", "#f04-b3", "#f04-b6"], { opacity: 1 }, { opacity: 0.35, duration: 0.4, ease: "power2.out", immediateRender: false }, 2.8);
+      lines.forEach((p, i) => {
+        tl.fromTo(p, { strokeDashoffset: +p.dataset.len }, { strokeDashoffset: 0, duration: 0.7, ease: "power2.inOut" }, 3.0 + i * 0.12);
+      });
+      tl.fromTo("#f04-big", { scale: 0.7, opacity: 0, transformOrigin: "50% 100%" }, { scale: 1, opacity: 1, duration: 0.5, ease: "back.out(1.5)" }, 3.55);
+      tl.fromTo("#f04-q1", { x: 40, opacity: 0 }, { x: 0, opacity: 1, duration: 0.5, ease: "power3.out" }, 4.1);
+      tl.fromTo("#f04-q2", { x: 40, opacity: 0 }, { x: 0, opacity: 1, duration: 0.5, ease: "power3.out" }, 4.6);
+
+      window.__timelines["04-brands"] = tl;
+    })();
+  </script>
+</template>

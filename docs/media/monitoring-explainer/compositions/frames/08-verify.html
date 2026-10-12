@@ -1,0 +1,94 @@
+<template>
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.14.2/dist/gsap.min.js"></script>
+  <style>
+    @font-face { font-family: "Noto Sans KR"; src: url("assets/fonts/NotoSansKR-500.woff2") format("woff2"); font-weight: 500; font-display: block; }
+    @font-face { font-family: "Noto Sans KR"; src: url("assets/fonts/NotoSansKR-700.woff2") format("woff2"); font-weight: 700; font-display: block; }
+    @font-face { font-family: "Noto Sans KR"; src: url("assets/fonts/NotoSansKR-900.woff2") format("woff2"); font-weight: 900; font-display: block; }
+    /* shared chrome (identical in every step frame) */
+    .mx-topbar { position: absolute; left: 120px; right: 120px; top: 52px; height: 60px; }
+    .mx-step { position: absolute; left: 0; top: 0; height: 60px; padding: 0 28px; border-radius: 999px; background: #163300; color: #9fe870; font-weight: 700; font-size: 26px; line-height: 60px; white-space: nowrap; }
+    .mx-rail { position: absolute; left: 556px; top: 24px; width: 568px; height: 12px; display: flex; gap: 8px; }
+    .mx-seg { display: block; flex: none; width: 40px; height: 12px; border-radius: 6px; background: #e8ebe6; box-sizing: border-box; }
+    .mx-seg.mx-past { background: #163300; }
+    .mx-seg.mx-now { background: #9fe870; border: 2px solid #163300; }
+    .mx-example { position: absolute; right: 0; top: 0; height: 60px; padding: 0 26px; border-radius: 999px; background: #e8ebe6; color: #163300; font-weight: 700; font-size: 24px; line-height: 60px; white-space: nowrap; }
+    .mx-dot { display: inline-block; width: 14px; height: 14px; border-radius: 50%; background: #9fe870; border: 2px solid #163300; margin-right: 12px; vertical-align: middle; position: relative; top: -2px; box-sizing: border-box; }
+    .mx-h { position: absolute; left: 120px; top: 150px; font-weight: 900; font-size: 72px; line-height: 1.12; letter-spacing: -0.03em; color: #163300; white-space: nowrap; }
+
+    #root { position: absolute; inset: 0; overflow: hidden; font-family: "Noto Sans KR", sans-serif; color: #163300; }
+    .f08-bg { position: absolute; inset: 0; background: #ffffff; }
+    .f08-stage { position: absolute; inset: 0; }
+    .f08-sub { position: absolute; left: 120px; top: 246px; font-weight: 500; font-size: 32px; color: #4d5e45; white-space: nowrap; }
+    .f08-card { position: absolute; top: 320px; width: 540px; height: 540px; border-radius: 28px; background: #e8ebe6; }
+    .f08-k1 { left: 120px; }
+    .f08-k2 { left: 690px; }
+    .f08-k3 { left: 1260px; }
+    .f08-icon { position: absolute; left: 44px; top: 44px; width: 108px; height: 108px; border-radius: 50%; background: #163300; }
+    .f08-icon svg { position: absolute; left: 22px; top: 22px; width: 64px; height: 64px; }
+    .f08-num { position: absolute; right: 44px; top: 56px; font-weight: 900; font-size: 30px; color: #4d5e45; }
+    .f08-title { position: absolute; left: 44px; top: 186px; font-weight: 900; font-size: 54px; letter-spacing: -0.03em; white-space: nowrap; }
+    .f08-body { position: absolute; left: 44px; top: 270px; width: 452px; font-weight: 500; font-size: 32px; line-height: 1.45; letter-spacing: -0.01em; color: #163300; }
+    .f08-body div { white-space: nowrap; }
+    .f08-check { position: absolute; left: 44px; top: 428px; display: flex; align-items: center; gap: 16px; font-weight: 900; font-size: 30px; white-space: nowrap; }
+    .f08-ring { position: relative; width: 72px; height: 72px; flex: none; }
+    .f08-ring i { position: absolute; inset: 0; border-radius: 50%; border: 5px solid #163300; box-sizing: border-box; background: #ffffff; }
+    .f08-ring b { position: absolute; inset: 0; border-radius: 50%; background: #9fe870; border: 5px solid #163300; box-sizing: border-box; }
+    .f08-ring svg { position: absolute; left: 14px; top: 14px; width: 44px; height: 44px; overflow: visible; }
+  </style>
+
+  <div data-hf-id="hf-ay7w" id="root" data-composition-id="08-verify" data-width="1920" data-height="1080" data-duration="8.5">
+    <div data-hf-id="hf-2gyz" id="f08-bg" class="clip f08-bg" data-start="0" data-duration="8.5" data-track-index="0"></div>
+    <div data-hf-id="hf-kzu0" id="f08-stage" class="clip f08-stage" data-start="0" data-duration="8.5" data-track-index="1">
+      <div data-hf-id="hf-qfey" class="mx-topbar" data-layout-allow-overlap="">
+        <div data-hf-id="hf-f86y" class="mx-step">08 / 12 · 검증</div>
+        <div data-hf-id="hf-jjfs" class="mx-rail">
+          <i data-hf-id="hf-o4pb" class="mx-seg mx-past"></i><i data-hf-id="hf-e29b" class="mx-seg mx-past"></i><i data-hf-id="hf-dnya" class="mx-seg mx-past"></i><i data-hf-id="hf-d9n9" class="mx-seg mx-past"></i><i data-hf-id="hf-g1sg" class="mx-seg mx-past"></i><i data-hf-id="hf-fnhf" class="mx-seg mx-past"></i><i data-hf-id="hf-f96e" class="mx-seg mx-past"></i><i data-hf-id="hf-8hh1" class="mx-seg mx-now"></i><i data-hf-id="hf-pv73" class="mx-seg"></i><i data-hf-id="hf-5vm7" class="mx-seg"></i><i data-hf-id="hf-5hb6" class="mx-seg"></i><i data-hf-id="hf-5305" class="mx-seg"></i>
+        </div>
+        <div data-hf-id="hf-wsc5" class="mx-example"><i data-hf-id="hf-1zpd" class="mx-dot"></i>교육용 예시 · 실제 측정 아님</div>
+      </div>
+      <div data-hf-id="hf-8x6c" class="mx-h" id="f08-h" data-layout-allow-overlap="">신호인지 검증한다</div>
+      <div data-hf-id="hf-f2qm" class="f08-sub" id="f08-sub">세 가지를 모두 통과할 때만 ‘신호 후보’로 본다</div>
+
+      <div data-hf-id="hf-bchh" class="f08-card f08-k1" id="f08-k1">
+        <div data-hf-id="hf-lzow" class="f08-icon"><svg data-hf-id="hf-3tfo" viewBox="0 0 64 64" fill="none" stroke="#9fe870" stroke-width="6" stroke-linecap="round"><circle data-hf-id="hf-6yql" cx="22" cy="22" r="10" /><circle data-hf-id="hf-d4zy" cx="44" cy="26" r="8" /><path data-hf-id="hf-jgvq" d="M6 54 C6 40, 38 40, 38 54" /><path data-hf-id="hf-fev7" d="M36 44 C42 38, 58 40, 58 54" /></svg></div>
+        <div data-hf-id="hf-mm7y" class="f08-num">01</div>
+        <div data-hf-id="hf-4e4b" class="f08-title">독립 작성자</div>
+        <div data-hf-id="hf-qijb" class="f08-body"><div data-hf-id="hf-bseg">서로 다른 계정들이 말하나?</div><div data-hf-id="hf-paoa">한 캠페인의 반복은 아닌가?</div></div>
+        <div data-hf-id="hf-4rg0" class="f08-check"><span data-hf-id="hf-pjw8" class="f08-ring"><i data-hf-id="hf-wt6k"></i><b data-hf-id="hf-ahhm" id="f08-f1"></b><svg data-hf-id="hf-ry3l" viewBox="0 0 44 44" fill="none" stroke="#163300" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"><path data-hf-id="hf-lidd" id="f08-v1" d="M6 23 L17 34 L38 10" /></svg></span>확인</div>
+      </div>
+      <div data-hf-id="hf-gjb9" class="f08-card f08-k2" id="f08-k2">
+        <div data-hf-id="hf-kzig" class="f08-icon"><svg data-hf-id="hf-tzzc" viewBox="0 0 64 64" fill="none" stroke="#9fe870" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"><circle data-hf-id="hf-bfsc" cx="32" cy="32" r="24" /><path data-hf-id="hf-pze4" d="M32 18 V32 L42 40" /></svg></div>
+        <div data-hf-id="hf-n0iz" class="f08-num">02</div>
+        <div data-hf-id="hf-cm23" class="f08-title">시간</div>
+        <div data-hf-id="hf-g5sn" class="f08-body"><div data-hf-id="hf-ab9d">언제 올라온 글인가?</div><div data-hf-id="hf-2ce5">한 시점에만 몰려 있나?</div></div>
+        <div data-hf-id="hf-e7rc" class="f08-check"><span data-hf-id="hf-sn2o" class="f08-ring"><i data-hf-id="hf-zeb8"></i><b data-hf-id="hf-6jdl" id="f08-f2"></b><svg data-hf-id="hf-rgqd" viewBox="0 0 44 44" fill="none" stroke="#163300" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"><path data-hf-id="hf-pghe" id="f08-v2" d="M6 23 L17 34 L38 10" /></svg></span>확인</div>
+      </div>
+      <div data-hf-id="hf-k00l" class="f08-card f08-k3" id="f08-k3">
+        <div data-hf-id="hf-jsld" class="f08-icon"><svg data-hf-id="hf-56qo" viewBox="0 0 64 64" fill="none" stroke="#9fe870" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"><path data-hf-id="hf-dr0y" d="M16 6 H40 L50 16 V58 H16 Z" /><path data-hf-id="hf-ij8j" d="M24 28 H42" /><path data-hf-id="hf-aah8" d="M24 38 H42" /><path data-hf-id="hf-wj2a" d="M24 48 H34" /></svg></div>
+        <div data-hf-id="hf-neu0" class="f08-num">03</div>
+        <div data-hf-id="hf-5lr1" class="f08-title">원문 근거</div>
+        <div data-hf-id="hf-frhm" class="f08-body"><div data-hf-id="hf-lzpu">원문을 직접 읽어 봤나?</div><div data-hf-id="hf-grcq">큰 글 한 건의 인상은 아닌가?</div></div>
+        <div data-hf-id="hf-d0u9" class="f08-check"><span data-hf-id="hf-rg5l" class="f08-ring"><i data-hf-id="hf-y7e5"></i><b data-hf-id="hf-5rps" id="f08-f3"></b><svg data-hf-id="hf-snng" viewBox="0 0 44 44" fill="none" stroke="#163300" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"><path data-hf-id="hf-telf" id="f08-v3" d="M6 23 L17 34 L38 10" /></svg></span>확인</div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    (function () {
+      const tl = gsap.timeline({ paused: true });
+      tl.fromTo("#f08-h", { y: 24, opacity: 0 }, { y: 0, opacity: 1, duration: 0.5, ease: "power3.out" }, 0.1);
+      tl.fromTo("#f08-sub", { opacity: 0 }, { opacity: 1, duration: 0.5, ease: "power2.out" }, 0.5);
+      [1, 2, 3].forEach((k, i) => {
+        const at = 1.0 + i * 2.0;
+        const v = document.querySelector("#f08-v" + k);
+        const len = v.getTotalLength();
+        v.style.strokeDasharray = len;
+        tl.fromTo("#f08-k" + k, { y: 60, opacity: 0 }, { y: 0, opacity: 1, duration: 0.6, ease: "power3.out" }, at);
+        tl.fromTo("#f08-f" + k, { scale: 0 }, { scale: 1, duration: 0.35, ease: "back.out(1.8)" }, at + 1.1);
+        tl.fromTo(v, { strokeDashoffset: len }, { strokeDashoffset: 0, duration: 0.35, ease: "power2.out" }, at + 1.25);
+      });
+
+      window.__timelines["08-verify"] = tl;
+    })();
+  </script>
+</template>

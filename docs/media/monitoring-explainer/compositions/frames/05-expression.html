@@ -1,0 +1,94 @@
+<template>
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.14.2/dist/gsap.min.js"></script>
+  <style>
+    @font-face { font-family: "Noto Sans KR"; src: url("assets/fonts/NotoSansKR-500.woff2") format("woff2"); font-weight: 500; font-display: block; }
+    @font-face { font-family: "Noto Sans KR"; src: url("assets/fonts/NotoSansKR-700.woff2") format("woff2"); font-weight: 700; font-display: block; }
+    @font-face { font-family: "Noto Sans KR"; src: url("assets/fonts/NotoSansKR-900.woff2") format("woff2"); font-weight: 900; font-display: block; }
+    /* shared chrome (identical in every step frame) */
+    .mx-topbar { position: absolute; left: 120px; right: 120px; top: 52px; height: 60px; }
+    .mx-step { position: absolute; left: 0; top: 0; height: 60px; padding: 0 28px; border-radius: 999px; background: #163300; color: #9fe870; font-weight: 700; font-size: 26px; line-height: 60px; white-space: nowrap; }
+    .mx-rail { position: absolute; left: 556px; top: 24px; width: 568px; height: 12px; display: flex; gap: 8px; }
+    .mx-seg { display: block; flex: none; width: 40px; height: 12px; border-radius: 6px; background: #e8ebe6; box-sizing: border-box; }
+    .mx-seg.mx-past { background: #163300; }
+    .mx-seg.mx-now { background: #9fe870; border: 2px solid #163300; }
+    .mx-example { position: absolute; right: 0; top: 0; height: 60px; padding: 0 26px; border-radius: 999px; background: #e8ebe6; color: #163300; font-weight: 700; font-size: 24px; line-height: 60px; white-space: nowrap; }
+    .mx-dot { display: inline-block; width: 14px; height: 14px; border-radius: 50%; background: #9fe870; border: 2px solid #163300; margin-right: 12px; vertical-align: middle; position: relative; top: -2px; box-sizing: border-box; }
+    .mx-h { position: absolute; left: 120px; top: 150px; font-weight: 900; font-size: 72px; line-height: 1.12; letter-spacing: -0.03em; color: #163300; white-space: nowrap; }
+
+    #root { position: absolute; inset: 0; overflow: hidden; font-family: "Noto Sans KR", sans-serif; color: #163300; }
+    .f05-bg { position: absolute; inset: 0; background: #ffffff; }
+    .f05-stage { position: absolute; inset: 0; }
+    .f05-card { position: absolute; left: 120px; top: 300px; width: 780px; height: 570px; border-radius: 28px; background: #e8ebe6; }
+    .f05-img { position: absolute; left: 22px; right: 22px; top: 22px; height: 170px; border-radius: 18px; background: #d3dacd; }
+    .f05-tag { position: absolute; right: 18px; top: 18px; height: 44px; padding: 0 18px; border-radius: 999px; background: #163300; color: #9fe870; font-weight: 700; font-size: 22px; line-height: 44px; }
+    .f05-author { position: absolute; left: 34px; top: 216px; display: flex; align-items: center; gap: 14px; font-weight: 700; font-size: 26px; color: #4d5e45; white-space: nowrap; }
+    .f05-author i { display: block; width: 46px; height: 46px; border-radius: 50%; background: #163300; }
+    .f05-lines { position: absolute; left: 34px; top: 296px; font-weight: 500; font-size: 36px; line-height: 1.0; letter-spacing: -0.01em; color: #163300; }
+    .f05-lines div { height: 74px; white-space: nowrap; }
+    .f05-word { position: relative; display: inline-block; font-weight: 900; }
+    .f05-mark { position: absolute; left: -6px; right: -6px; top: -4px; bottom: -8px; border-radius: 10px; background: #9fe870; transform-origin: 0% 50%; }
+    .f05-word b { position: relative; font-weight: 900; }
+    .f05-link { position: absolute; left: 0; top: 0; width: 1920px; height: 1080px; overflow: visible; }
+    .f05-hero { position: absolute; left: 1040px; top: 316px; height: 220px; padding: 0 70px; border-radius: 999px; background: #9fe870; font-weight: 900; font-size: 150px; line-height: 220px; letter-spacing: -0.04em; white-space: nowrap; }
+    .f05-def { position: absolute; left: 1060px; top: 580px; font-weight: 900; font-size: 46px; line-height: 1.3; letter-spacing: -0.02em; white-space: nowrap; }
+    .f05-def span { display: block; }
+    .f05-def em { font-style: normal; font-weight: 700; font-size: 24px; color: #163300; display: inline-block; height: 40px; padding: 0 18px; border-radius: 999px; background: #e8ebe6; line-height: 40px; margin-bottom: 12px; letter-spacing: 0; }
+    .f05-note { position: absolute; left: 1060px; top: 790px; height: 72px; padding: 0 30px; border-radius: 999px; border: 3px solid #163300; box-sizing: border-box; font-weight: 700; font-size: 30px; line-height: 66px; white-space: nowrap; }
+  </style>
+
+  <div data-hf-id="hf-c3xj" id="root" data-composition-id="05-expression" data-width="1920" data-height="1080" data-duration="7.5">
+    <div data-hf-id="hf-y88c" id="f05-bg" class="clip f05-bg" data-start="0" data-duration="7.5" data-track-index="0"></div>
+    <div data-hf-id="hf-w9rb" id="f05-stage" class="clip f05-stage" data-start="0" data-duration="7.5" data-track-index="1">
+      <div data-hf-id="hf-qfey" class="mx-topbar" data-layout-allow-overlap="">
+        <div data-hf-id="hf-fdca" class="mx-step">05 / 12 · 표현 발견</div>
+        <div data-hf-id="hf-jjfs" class="mx-rail">
+          <i data-hf-id="hf-o4pb" class="mx-seg mx-past"></i><i data-hf-id="hf-e29b" class="mx-seg mx-past"></i><i data-hf-id="hf-dnya" class="mx-seg mx-past"></i><i data-hf-id="hf-d9n9" class="mx-seg mx-past"></i><i data-hf-id="hf-8hh1" class="mx-seg mx-now"></i><i data-hf-id="hf-pv73" class="mx-seg"></i><i data-hf-id="hf-5vm7" class="mx-seg"></i><i data-hf-id="hf-5hb6" class="mx-seg"></i><i data-hf-id="hf-5305" class="mx-seg"></i><i data-hf-id="hf-7v5c" class="mx-seg"></i><i data-hf-id="hf-7gub" class="mx-seg"></i><i data-hf-id="hf-72ja" class="mx-seg"></i>
+        </div>
+        <div data-hf-id="hf-wsc5" class="mx-example"><i data-hf-id="hf-1zpd" class="mx-dot"></i>교육용 예시 · 실제 측정 아님</div>
+      </div>
+      <div data-hf-id="hf-3pbv" class="mx-h" id="f05-h" data-layout-allow-overlap="">고객이 쓰는 말을 발견한다</div>
+
+      <div data-hf-id="hf-1yz6" class="f05-card" id="f05-card">
+        <div data-hf-id="hf-w7ux" class="f05-img"></div>
+        <div data-hf-id="hf-v6jc" class="f05-tag">예시 글</div>
+        <div data-hf-id="hf-5l5q" class="f05-author"><i data-hf-id="hf-wt6k"></i>작성자 A · 수분크림 · 비교 브랜드 A 언급</div>
+        <div data-hf-id="hf-7w5x" class="f05-lines">
+          <div data-hf-id="hf-323w" id="f05-t1">요즘 건조해서 크림을 바꿨어요</div>
+          <div data-hf-id="hf-oa2u" id="f05-t2"><span data-hf-id="hf-8ts7" class="f05-word" id="f05-word"><i data-hf-id="hf-4i82" class="f05-mark" id="f05-mark"></i><b data-hf-id="hf-zmu7">수부지</b></span>라서 가벼운 게 좋아요</div>
+          <div data-hf-id="hf-13ho" id="f05-t3">끈적임 없이 흡수되는 느낌</div>
+        </div>
+      </div>
+
+      <svg data-hf-id="hf-2k8z" class="f05-link" viewBox="0 0 1920 1080" fill="none" stroke="#163300" stroke-width="5" stroke-linecap="round">
+        <path data-hf-id="hf-ptqr" id="f05-path" d="M 900 690 C 990 690, 950 426, 1040 426" />
+      </svg>
+      <div data-hf-id="hf-0w5i" class="f05-hero" id="f05-hero">수부지</div>
+      <div data-hf-id="hf-0w6w" class="f05-def" id="f05-def">
+        <em data-hf-id="hf-84bf">뜻 · 피부 타입을 부르는 고객의 말</em>
+        <span data-hf-id="hf-3hqe">수분 부족형 지성 피부를</span>
+        <span data-hf-id="hf-d6q1">줄여 부르는 말</span>
+      </div>
+      <div data-hf-id="hf-vya4" class="f05-note" id="f05-note">이 말이 우리 제품과 맞닿아 있을까?</div>
+    </div>
+  </div>
+
+  <script>
+    (function () {
+      const tl = gsap.timeline({ paused: true });
+      const path = document.querySelector("#f05-path");
+      const len = path.getTotalLength();
+      path.style.strokeDasharray = len;
+
+      tl.fromTo("#f05-h", { y: 24, opacity: 0 }, { y: 0, opacity: 1, duration: 0.5, ease: "power3.out" }, 0.1);
+      tl.fromTo("#f05-card", { y: 50, opacity: 0 }, { y: 0, opacity: 1, duration: 0.6, ease: "power3.out" }, 0.7);
+      tl.fromTo(["#f05-t1", "#f05-t2", "#f05-t3"], { y: 16, opacity: 0 }, { y: 0, opacity: 1, duration: 0.45, ease: "power3.out", stagger: 0.3 }, 1.2);
+      tl.fromTo("#f05-mark", { scaleX: 0 }, { scaleX: 1, duration: 0.55, ease: "power3.inOut" }, 2.6);
+      tl.fromTo(path, { strokeDashoffset: len }, { strokeDashoffset: 0, duration: 0.8, ease: "power2.inOut" }, 3.4);
+      tl.fromTo("#f05-hero", { scale: 0.5, opacity: 0, transformOrigin: "0% 50%" }, { scale: 1, opacity: 1, duration: 0.6, ease: "back.out(1.4)" }, 3.9);
+      tl.fromTo("#f05-def", { y: 24, opacity: 0 }, { y: 0, opacity: 1, duration: 0.55, ease: "power3.out" }, 5.0);
+      tl.fromTo("#f05-note", { y: 16, opacity: 0 }, { y: 0, opacity: 1, duration: 0.5, ease: "power3.out" }, 5.7);
+
+      window.__timelines["05-expression"] = tl;
+    })();
+  </script>
+</template>

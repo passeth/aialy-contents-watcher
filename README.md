@@ -6,6 +6,14 @@ Instagram 콘텐츠를 모아 브랜드·제품·소비자 표현을 연결하�
 
 > 이 문서의 ‘수분크림 → 비교 브랜드 A → 수부지 → 탄력탱탱’은 **사용법을 설명하는 가상 탐색 사례**입니다. 실제 분석 결과나 특정 브랜드의 활동에 대한 주장이 아닙니다. 현재 검색·집계 범위는 **연결해 수집한 게시물**이며, Instagram 전체를 검색하는 기능은 아직 연결되지 않았습니다.
 
+## 89초 영상으로 먼저 보기
+
+한국어 내레이션과 함께 **질문 → 탐색 → 근거 → 가설 → 작은 실험**의 흐름을 따라가세요.
+
+https://github.com/user-attachments/assets/14b3c4c7-cf60-43e9-ace6-42c33fa22b05
+
+[GitHub 이슈에서 영상 보기](https://github.com/passeth/aialy-contents-watcher/issues/1#issuecomment-6129730193) · [편집 가능한 영상 소스](docs/media/monitoring-explainer/README.md)
+
 ## 처음이라면: 많이 모으기보다 질문 하나부터
 
 ‘요즘 뭐가 유행하지?’는 너무 넓습니다. 오늘 확인할 질문을 한 문장으로 바꿔 보세요.

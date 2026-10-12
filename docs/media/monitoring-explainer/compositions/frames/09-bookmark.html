@@ -1,0 +1,95 @@
+<template>
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.14.2/dist/gsap.min.js"></script>
+  <style>
+    @font-face { font-family: "Noto Sans KR"; src: url("assets/fonts/NotoSansKR-500.woff2") format("woff2"); font-weight: 500; font-display: block; }
+    @font-face { font-family: "Noto Sans KR"; src: url("assets/fonts/NotoSansKR-700.woff2") format("woff2"); font-weight: 700; font-display: block; }
+    @font-face { font-family: "Noto Sans KR"; src: url("assets/fonts/NotoSansKR-900.woff2") format("woff2"); font-weight: 900; font-display: block; }
+    /* shared chrome (identical in every step frame) */
+    .mx-topbar { position: absolute; left: 120px; right: 120px; top: 52px; height: 60px; }
+    .mx-step { position: absolute; left: 0; top: 0; height: 60px; padding: 0 28px; border-radius: 999px; background: #163300; color: #9fe870; font-weight: 700; font-size: 26px; line-height: 60px; white-space: nowrap; }
+    .mx-rail { position: absolute; left: 556px; top: 24px; width: 568px; height: 12px; display: flex; gap: 8px; }
+    .mx-seg { display: block; flex: none; width: 40px; height: 12px; border-radius: 6px; background: #e8ebe6; box-sizing: border-box; }
+    .mx-seg.mx-past { background: #163300; }
+    .mx-seg.mx-now { background: #9fe870; border: 2px solid #163300; }
+    .mx-example { position: absolute; right: 0; top: 0; height: 60px; padding: 0 26px; border-radius: 999px; background: #e8ebe6; color: #163300; font-weight: 700; font-size: 24px; line-height: 60px; white-space: nowrap; }
+    .mx-dot { display: inline-block; width: 14px; height: 14px; border-radius: 50%; background: #9fe870; border: 2px solid #163300; margin-right: 12px; vertical-align: middle; position: relative; top: -2px; box-sizing: border-box; }
+    .mx-h { position: absolute; left: 120px; top: 150px; font-weight: 900; font-size: 72px; line-height: 1.12; letter-spacing: -0.03em; color: #163300; white-space: nowrap; }
+
+    #root { position: absolute; inset: 0; overflow: hidden; font-family: "Noto Sans KR", sans-serif; color: #163300; }
+    .f09-bg { position: absolute; inset: 0; background: #ffffff; }
+    .f09-stage { position: absolute; inset: 0; }
+    .f09-folder { position: absolute; left: 540px; top: 330px; width: 560px; height: 520px; }
+    .f09-back { position: absolute; left: 0; top: 40px; width: 560px; height: 480px; border-radius: 28px; background: #24410f; }
+    .f09-tab { position: absolute; left: 0; top: 0; width: 230px; height: 80px; border-radius: 24px 24px 0 0; background: #24410f; }
+    .f09-post { position: absolute; left: 120px; top: 380px; width: 320px; height: 400px; border-radius: 24px; background: #e8ebe6; border: 4px solid #ffffff; box-sizing: border-box; }
+    .f09-post .f09-img { position: absolute; left: 16px; right: 16px; top: 16px; height: 170px; border-radius: 16px; background: #d3dacd; }
+    .f09-post .f09-ln { position: absolute; left: 22px; height: 16px; border-radius: 8px; background: #c2cbbc; }
+    .f09-front { position: absolute; left: 0; top: 230px; width: 560px; height: 290px; border-radius: 28px; background: #163300; }
+    .f09-flabel { position: absolute; left: 40px; top: 60px; font-weight: 900; font-size: 46px; color: #9fe870; letter-spacing: -0.02em; white-space: nowrap; }
+    .f09-fsub { position: absolute; left: 40px; top: 130px; font-weight: 700; font-size: 26px; color: #e8ebe6; white-space: nowrap; }
+    .f09-ribbon { position: absolute; right: 50px; top: -20px; width: 64px; height: 110px; }
+    .f09-memo { position: absolute; left: 1220px; top: 330px; width: 580px; height: 520px; border-radius: 28px; background: #ffffff; border: 5px solid #163300; box-sizing: border-box; }
+    .f09-mt { position: absolute; left: 40px; top: 36px; font-weight: 900; font-size: 44px; white-space: nowrap; }
+    .f09-row { position: absolute; left: 40px; display: flex; align-items: center; gap: 18px; font-weight: 700; font-size: 34px; white-space: nowrap; }
+    .f09-row i { display: block; width: 44px; height: 44px; border-radius: 50%; background: #9fe870; border: 4px solid #163300; box-sizing: border-box; position: relative; }
+    .f09-row i::after { content: ""; position: absolute; left: 10px; top: 7px; width: 12px; height: 18px; border-right: 5px solid #163300; border-bottom: 5px solid #163300; transform: rotate(45deg); }
+    .f09-why { position: absolute; left: 102px; top: 434px; width: 370px; font-weight: 500; font-size: 26px; line-height: 1.35; color: #4d5e45; }
+    .f09-why div { white-space: nowrap; }
+  </style>
+
+  <div data-hf-id="hf-zy4a" id="root" data-composition-id="09-bookmark" data-width="1920" data-height="1080" data-duration="6.1">
+    <div data-hf-id="hf-7zfl" id="f09-bg" class="clip f09-bg" data-start="0" data-duration="6.1" data-track-index="0"></div>
+    <div data-hf-id="hf-qaho" id="f09-stage" class="clip f09-stage" data-start="0" data-duration="6.1" data-track-index="1">
+      <div data-hf-id="hf-qfey" class="mx-topbar" data-layout-allow-overlap="">
+        <div data-hf-id="hf-qbrh" class="mx-step">09 / 12 · 북마크</div>
+        <div data-hf-id="hf-jjfs" class="mx-rail">
+          <i data-hf-id="hf-o4pb" class="mx-seg mx-past"></i><i data-hf-id="hf-e29b" class="mx-seg mx-past"></i><i data-hf-id="hf-dnya" class="mx-seg mx-past"></i><i data-hf-id="hf-d9n9" class="mx-seg mx-past"></i><i data-hf-id="hf-g1sg" class="mx-seg mx-past"></i><i data-hf-id="hf-fnhf" class="mx-seg mx-past"></i><i data-hf-id="hf-f96e" class="mx-seg mx-past"></i><i data-hf-id="hf-euvd" class="mx-seg mx-past"></i><i data-hf-id="hf-8hh1" class="mx-seg mx-now"></i><i data-hf-id="hf-pv73" class="mx-seg"></i><i data-hf-id="hf-5vm7" class="mx-seg"></i><i data-hf-id="hf-5hb6" class="mx-seg"></i>
+        </div>
+        <div data-hf-id="hf-wsc5" class="mx-example"><i data-hf-id="hf-1zpd" class="mx-dot"></i>교육용 예시 · 실제 측정 아님</div>
+      </div>
+      <div data-hf-id="hf-u0mt" class="mx-h" id="f09-h" data-layout-allow-overlap="">근거를 북마크로 남긴다</div>
+
+      <div data-hf-id="hf-u4x2" class="f09-folder" id="f09-folder">
+        <div data-hf-id="hf-n59x" class="f09-tab"></div>
+        <div data-hf-id="hf-vldt" class="f09-back"></div>
+      </div>
+      <div data-hf-id="hf-y536" class="f09-post" id="f09-post">
+        <div data-hf-id="hf-4bil" class="f09-img"></div>
+        <i data-hf-id="hf-aq1m" class="f09-ln" style="top: 214px; width: 230px"></i>
+        <i data-hf-id="hf-nng2" class="f09-ln" style="top: 248px; width: 260px"></i>
+        <i data-hf-id="hf-wso5" class="f09-ln" style="top: 282px; width: 180px"></i>
+      </div>
+      <div data-hf-id="hf-n06v" class="f09-folder" id="f09-folder-front" style="pointer-events: none">
+        <div data-hf-id="hf-xsxx" class="f09-front">
+          <svg data-hf-id="hf-s1e8" class="f09-ribbon" viewBox="0 0 64 110"><path data-hf-id="hf-tez8" d="M0 0 H64 V110 L32 84 L0 110 Z" fill="#9fe870" /></svg>
+          <div data-hf-id="hf-yre8" class="f09-flabel">수부지 리서치</div>
+          <div data-hf-id="hf-725g" class="f09-fsub">북마크 폴더 · 예시</div>
+        </div>
+      </div>
+
+      <div data-hf-id="hf-k4z6" class="f09-memo" id="f09-memo">
+        <div data-hf-id="hf-qjbj" class="f09-mt">메모</div>
+        <div data-hf-id="hf-4bni" class="f09-row" id="f09-r1" style="top: 120px"><i data-hf-id="hf-wt6k"></i>원문 링크</div>
+        <div data-hf-id="hf-zzrn" class="f09-row" id="f09-r2" style="top: 196px"><i data-hf-id="hf-zeb8"></i>작성자</div>
+        <div data-hf-id="hf-8k5f" class="f09-row" id="f09-r3" style="top: 272px"><i data-hf-id="hf-y7e5"></i>게시일</div>
+        <div data-hf-id="hf-nxzd" class="f09-row" id="f09-r4" style="top: 348px"><i data-hf-id="hf-ylp6"></i>왜 저장했나</div>
+        <div data-hf-id="hf-teg2" class="f09-why" id="f09-why"><div data-hf-id="hf-mbx5">‘수부지’와 ‘탄력’ 표현이</div><div data-hf-id="hf-opkf">한 글에 함께 나옴 (예시)</div></div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    (function () {
+      const tl = gsap.timeline({ paused: true });
+      tl.fromTo("#f09-h", { y: 24, opacity: 0 }, { y: 0, opacity: 1, duration: 0.5, ease: "power3.out" }, 0.1);
+      tl.fromTo(["#f09-folder", "#f09-folder-front"], { y: 40, opacity: 0 }, { y: 0, opacity: 1, duration: 0.55, ease: "power3.out" }, 0.4);
+      tl.fromTo("#f09-post", { x: 0, y: 0, rotation: -4, opacity: 0 }, { x: 0, y: 0, rotation: -4, opacity: 1, duration: 0.4, ease: "power2.out" }, 0.6);
+      tl.fromTo("#f09-post", { x: 0, y: 0, rotation: -4 }, { x: 540, y: 10, rotation: 0, duration: 0.9, ease: "power3.inOut", immediateRender: false }, 1.1);
+      tl.fromTo("#f09-memo", { scale: 1.12, rotation: 3, opacity: 0 }, { scale: 1, rotation: 0, opacity: 1, duration: 0.5, ease: "power3.out" }, 2.4);
+      tl.fromTo(["#f09-r1", "#f09-r2", "#f09-r3", "#f09-r4"], { x: -20, opacity: 0 }, { x: 0, opacity: 1, duration: 0.35, ease: "power3.out", stagger: 0.22 }, 2.75);
+      tl.fromTo("#f09-why", { opacity: 0 }, { opacity: 1, duration: 0.4, ease: "power2.out" }, 3.75);
+
+      window.__timelines["09-bookmark"] = tl;
+    })();
+  </script>
+</template>
