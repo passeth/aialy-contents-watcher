@@ -340,7 +340,7 @@ function App() {
       <aside className={"sidebar " + (sidebar ? "open" : "")}>
         <a
           className="logo"
-          href="?page=discover"
+          href={"?" + new URLSearchParams({ page: "discover", workspace: workspaceId })}
           onClick={(e) => {
             e.preventDefault();
             go("discover");
@@ -459,7 +459,7 @@ function App() {
             사용 가이드
           </button>
           <div className="account">
-            <span>C</span>
+            <span>A</span>
             <div>
               <strong>개인 워크스페이스</strong>
               <small>Local workspace</small>
@@ -478,7 +478,7 @@ function App() {
             >
               <Menu size={19} />
             </button>
-            <span>워크스페이스</span>
+            <span>{spaces.find((space) => space.id === workspaceId)?.name || "워크스페이스"}</span>
             <ChevronRight size={13} />
             <strong>{titles[page]}</strong>
           </div>
@@ -494,7 +494,7 @@ function App() {
             >
               <CircleHelp size={19} />
             </button>
-            <div className="profile-dot">C</div>
+            <div className="profile-dot">A</div>
           </div>
         </header>
         <main>
